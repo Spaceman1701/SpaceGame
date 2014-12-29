@@ -15,7 +15,7 @@ public class DrawPanel extends JPanel{
     private int xRes;
     private int yRes;
 
-    private TreeSet<Sprite> sprites;
+    private Camera currentCamera;
 
     public DrawPanel(int xRes, int yRes) {
         this.xRes = xRes;
@@ -24,6 +24,10 @@ public class DrawPanel extends JPanel{
         setFocusable(true);
         requestFocusInWindow();
         setPreferredSize(new Dimension(xRes, yRes));
+    }
+
+    public void setCurrentCamera(Camera camera) {
+        this.currentCamera = camera;
     }
 
     @Override
@@ -35,9 +39,26 @@ public class DrawPanel extends JPanel{
 
         g2.setColor(Color.BLUE);
         g2.fillRect(-getWidth()/4,-getHeight()/4, getWidth()/2, getHeight()/2);
+
+        g2.translate(-currentCamera.getPosition().x, -currentCamera.getPosition().y);
+        g2.scale(1.0/(double)currentCamera.getScale(), 1.0/(double)currentCamera.getScale());
+
+        for(Sprite spr : Renderer.getInstance().getSprites()) {
+            drawSprite(spr, g2);
+        }
+        Renderer.getInstance().initSet();
     }
 
-    public void drawSprite(Sprite spr, Camera camera) {
+    private void drawSprite(Sprite spr, Graphics2D g2) {
+        int xTransform = (int)spr.getPosition().x + (int)(spr.getWidth()/2.0f);
+        int yTransform = (int)spr.getPosition().y + (int)(spr.getHeight()/2.0f);
 
+        g2.translate(xTransform, yTransform);
+        g2.rotate(spr.getRotation());
+
+        g2.drawImage(spr.getImage(), 0, 0, (int)spr.getWidth(), (int)spr.getHeight(), null);
+
+        g2.rotate(-spr.getRotation());
+        g2.translate(-xTransform, -yTransform);
     }
 }
