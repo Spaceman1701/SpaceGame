@@ -24,7 +24,11 @@ public class Node {
         return children;
     }
 
-    public void render() {
-        children.forEach((Node child) -> child.render());
+    public void draw() {
+        children.forEach((Node child) -> child.draw());
+    }
+
+    public void update(float timeElapsed) {
+        children.forEach((Node child) -> child.update(timeElapsed));
     }
 }

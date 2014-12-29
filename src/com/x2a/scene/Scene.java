@@ -6,18 +6,13 @@ import java.util.List;
 /**
  * Created by David on 12/28/2014.
  */
-public class Scene {
+public class Scene extends Node{
 
-    public List<Node> children;
+
     public Camera camera;
 
     public Scene() {
-        children = new ArrayList<Node>();
         camera = new Camera();
-    }
-
-    public List<Node> getChildren() {
-        return children;
     }
 
     public Camera getCamera() {

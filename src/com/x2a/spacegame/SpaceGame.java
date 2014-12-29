@@ -12,11 +12,20 @@ public class SpaceGame extends Game {
     Sprite test;
 
     public SpaceGame() {
-        test = new TestSprite();
+        test = new TestSprite(new Vector2(), "test1", 1.1f);
+
+        getCurrentScene().getChildren().add(test);
+
+        getCurrentScene().getChildren().add(new TestSprite(new Vector2(50, 0), "test2", 1.0f));
     }
 
     @Override
     public void update(float timeElapsed) {
-        test.draw();
+        //getCurrentScene().getCamera().moveCameraPosition(new Vector2(-1, 0));
+
+        getCurrentScene().update(timeElapsed);
+        getCurrentScene().draw();
+
+       // test.draw();
     }
 }

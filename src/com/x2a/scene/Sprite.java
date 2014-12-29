@@ -26,7 +26,7 @@ public abstract class Sprite extends Node{
 
     private final String name;
 
-    public Sprite(Vector2 position, float height, float width, float rotation, String imageLocation, String name) {
+    public Sprite(Vector2 position, float height, float width, float rotation, float depth, String imageLocation, String name) {
         try {
             image = ImageIO.read(new File(imageLocation));
         } catch (IOException e) {
@@ -38,6 +38,7 @@ public abstract class Sprite extends Node{
         this.height = height;
         this.width = width;
         this.rotation = rotation;
+        this.depth = depth;
 
         this.name = name;
     }
@@ -46,7 +47,7 @@ public abstract class Sprite extends Node{
      *
      * @param timeElapsed time elapsed in milliseconds
      */
-    public abstract void act(float timeElapsed);
+    public abstract void update(float timeElapsed);
 
     public float getDepth() {
         return depth;
@@ -92,12 +93,20 @@ public abstract class Sprite extends Node{
         return rotation;
     }
 
-    public void setRotation() {
+    public void setRotation(float rotation) {
         this.rotation = rotation;
     }
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setDepth(float depth) {
+        this.depth = depth;
     }
 
     public void draw() {
