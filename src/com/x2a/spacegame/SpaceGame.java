@@ -21,6 +21,11 @@ public class SpaceGame extends Game {
 
 
     public SpaceGame() {
+        planetScene = new PlanetArea();
+        spaceScene = new SpaceArea();
+        warpScene = new WarpArea();
+
+
         initDebugCommands();
     }
 
