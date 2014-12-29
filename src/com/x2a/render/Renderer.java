@@ -17,12 +17,7 @@ public class Renderer {
     private TreeSet<Sprite> sprites;
 
     private Renderer() {
-        sprites = new TreeSet<Sprite>(new Comparator<Sprite>() {
-            @Override
-            public int compare(Sprite spr1, Sprite spr2) {
-                return (int)(spr1.getDepth() - spr2.getDepth());
-            }
-        });
+        initSet();
     }
 
 
@@ -31,16 +26,21 @@ public class Renderer {
     }
 
 
-    public void drawSprite(Sprite spr, Camera camera) {
-
+    public void drawSprite(Sprite spr) {
+        sprites.add(spr);
     }
 
     protected Collection<Sprite> getSprites() {
         return sprites;
     }
 
-    protected void clearSprites() {
-        sprites = new TreeSet<Sprite>();
+    protected void initSet() {
+        sprites = new TreeSet<Sprite>(new Comparator<Sprite>() {
+            @Override
+            public int compare(Sprite spr1, Sprite spr2) {
+                return (int)(spr1.getDepth() - spr2.getDepth());
+            }
+        });
     }
 
 
