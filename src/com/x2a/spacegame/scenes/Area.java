@@ -6,7 +6,7 @@ import com.x2a.spacegame.SpaceGame;
 /**
  * Created by Ethan on 12/29/2014.
  */
-public class Area extends Scene{
+public abstract class Area extends Scene{
 
     private SpaceGame game;
 
