@@ -40,8 +40,12 @@ public class DrawPanel extends JPanel{
         g2.setColor(Color.BLUE);
         g2.fillRect(-getWidth()/4,-getHeight()/4, getWidth()/2, getHeight()/2);
 
-        g2.translate(-currentCamera.getPosition().x, -currentCamera.getPosition().y);
-        g2.scale(1.0/(double)currentCamera.getScale(), 1.0/(double)currentCamera.getScale());
+        if (currentCamera != null) {
+            g2.translate(-currentCamera.getPosition().x, -currentCamera.getPosition().y);
+            g2.scale(1.0 / (double) currentCamera.getScale(), 1.0 / (double) currentCamera.getScale());
+        } else {
+            System.err.println("Camera is null. Probably hasn't been initialized yet. This is expected to occur twice. If error is happening every frame then you done fucked it up. This message is from DrawPanel.paintComponent.");
+        }
 
         for(Sprite spr : Renderer.getInstance().getSprites()) {
             drawSprite(spr, g2);
