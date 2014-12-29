@@ -1,6 +1,7 @@
 package com.x2a.math;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 /**
  * Created by David on 12/28/2014.
@@ -8,6 +9,7 @@ import java.text.DecimalFormat;
 public class Vector2 {
 
     private static final DecimalFormat df = new DecimalFormat("#.##");
+    private static final float EPSILON = 0.0001f;
 
     public float x;
     public float y;
@@ -66,6 +68,16 @@ public class Vector2 {
 
     public float dot(Vector2 vector) {
         return x * vector.x + y * vector.y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Vector2) {
+            Vector2 v = (Vector2) o;
+            return Math.abs(v.x - x) < EPSILON && Math.abs(v.y - y) < EPSILON;
+        } else {
+            return false;
+        }
     }
 
     @Override
