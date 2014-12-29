@@ -1,5 +1,8 @@
 package com.x2a.spacegame;
 
+import com.x2a.input.InputUtil;
+import com.x2a.input.KeyEventData;
+import com.x2a.input.KeyEventListener;
 import com.x2a.math.Vector2;
 import com.x2a.scene.Sprite;
 
