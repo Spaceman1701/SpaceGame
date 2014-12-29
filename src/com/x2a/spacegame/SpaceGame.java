@@ -48,6 +48,7 @@ public class SpaceGame extends Game {
 
     @Override
     public void update(float timeElapsed) {
-
+        getCurrentScene().update(timeElapsed);
+        getCurrentScene().draw();
     }
 }
