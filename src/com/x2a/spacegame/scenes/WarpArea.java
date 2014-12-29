@@ -5,5 +5,5 @@ import com.x2a.scene.Scene;
 /**
  * Created by Ethan on 12/29/2014.
  */
-public class WarpMap extends Scene{
+public class WarpArea extends Scene{
 }
