@@ -1,5 +1,7 @@
 package com.x2a;
 
+import com.x2a.render.DrawPanel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
