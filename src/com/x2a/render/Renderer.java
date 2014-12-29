@@ -38,7 +38,7 @@ public class Renderer {
         sprites = new TreeSet<Sprite>(new Comparator<Sprite>() {
             @Override
             public int compare(Sprite spr1, Sprite spr2) {
-                float val = spr2.getDepth() - spr1.getDepth();
+                float val = spr2.getDepth() - spr1.getDepth(); //Higher depth draws first
 
                 if (val == 0) {
                     val = 1;
