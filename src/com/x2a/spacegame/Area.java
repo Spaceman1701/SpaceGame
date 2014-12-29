@@ -1,4 +1,4 @@
-package com.x2a.spacegame.scenes;
+package com.x2a.spacegame;
 
 import com.x2a.scene.Scene;
 import com.x2a.spacegame.SpaceGame;

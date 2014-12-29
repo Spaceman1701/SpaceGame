@@ -6,10 +6,6 @@ import com.x2a.input.KeyEventData;
 import com.x2a.input.KeyEventListener;
 import com.x2a.input.KeyEventType;
 import com.x2a.math.Vector2;
-import com.x2a.spacegame.scenes.PlanetArea;
-import com.x2a.spacegame.scenes.SpaceArea;
-import com.x2a.spacegame.scenes.WarpArea;
-import jdk.internal.util.xml.impl.Input;
 
 /**
  * Created by Ethan on 12/28/2014.
