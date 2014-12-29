@@ -17,6 +17,7 @@ public class Camera {
 
     public Camera(Vector2 position) {
         this.position = new Vector2(position);
+        scale = 1.0f;
     }
 
     public Camera(Vector2 position, float scale) {
