@@ -60,8 +60,8 @@ public class DrawPanel extends JPanel{
     }
 
     private void drawSprite(Sprite spr, Graphics2D g2) {
-        int xTransform = (int)spr.getPosition().x + (int)(spr.getWidth()/2.0f);
-        int yTransform = (int)spr.getPosition().y + (int)(spr.getHeight()/2.0f);
+        int xTransform = (int)spr.getPosition().x - (int)(spr.getWidth()/2.0f);
+        int yTransform = (int)spr.getPosition().y - (int)(spr.getHeight()/2.0f);
 
         g2.translate(xTransform, yTransform);
         g2.rotate(spr.getRotation());

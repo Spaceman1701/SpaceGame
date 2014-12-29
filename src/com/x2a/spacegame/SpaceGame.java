@@ -5,6 +5,7 @@ import com.x2a.input.InputUtil;
 import com.x2a.input.KeyEventData;
 import com.x2a.input.KeyEventListener;
 import com.x2a.input.KeyEventType;
+import com.x2a.math.Vector2;
 import com.x2a.spacegame.scenes.PlanetArea;
 import com.x2a.spacegame.scenes.SpaceArea;
 import com.x2a.spacegame.scenes.WarpArea;
@@ -21,11 +22,11 @@ public class SpaceGame extends Game {
 
 
     public SpaceGame() {
-        planetScene = new PlanetArea();
-        spaceScene = new SpaceArea();
-        warpScene = new WarpArea();
+        planetScene = new PlanetArea(this);
+        spaceScene = new SpaceArea(this);
+        warpScene = new WarpArea(this);
 
-
+        spaceScene.getChildren().add(new TestSprite(new Vector2(), "test", 1.0f));
         initDebugCommands();
     }
 

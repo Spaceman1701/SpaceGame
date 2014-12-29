@@ -15,7 +15,7 @@ public class TestSprite extends Sprite {
 
 
     public TestSprite(Vector2 position, String name, float depth) {
-        super(position, 100, 100, 0, depth, "res/images/sprites/Test Sprite Image.png", name);
+        super(position, 300, 300, 0, depth, "res/images/sprites/Spaceship 2.png", name);
     }
 
     @Override
