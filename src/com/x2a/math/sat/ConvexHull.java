@@ -49,6 +49,7 @@ public class ConvexHull {
         points.add(new Vector2(3f, 2f));
         points.add(new Vector2(6f, 20f));
         points.add(new Vector2(6.0000001f, 20f));
+        points.add(new Vector2(6.0000001f, 20f));
 
         createConvexHull(points);
 
