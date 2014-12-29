@@ -1,5 +1,6 @@
 package com.x2a.render;
 
+import com.x2a.input.InputUtil;
 import com.x2a.scene.Camera;
 import com.x2a.scene.Sprite;
 
@@ -20,6 +21,11 @@ public class DrawPanel extends JPanel{
     public DrawPanel(int xRes, int yRes) {
         this.xRes = xRes;
         this.yRes = yRes;
+
+        addMouseListener(InputUtil.getInstance());
+        addMouseMotionListener(InputUtil.getInstance());
+        addMouseWheelListener(InputUtil.getInstance());
+        addKeyListener(InputUtil.getInstance());
 
         setFocusable(true);
         requestFocusInWindow();
