@@ -29,7 +29,5 @@ public class DrawPanel extends JPanel{
 
         g2.setColor(Color.BLUE);
         g2.fillRect(-getWidth()/4,-getHeight()/4, getWidth()/2, getHeight()/2);
-
-
     }
 }
