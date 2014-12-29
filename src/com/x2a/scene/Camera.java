@@ -8,33 +8,28 @@ import com.x2a.math.Vector2;
 public class Camera {
 
     private Vector2 position;
-    private float width;
-    private float height;
+    private float scale;
 
     public Camera() {
         position = new Vector2();
+        scale = 1.0f;
     }
 
     public Camera(Vector2 position) {
         this.position = new Vector2(position);
     }
 
-    public Camera(Vector2 position, float width, float height) {
+    public Camera(Vector2 position, float scale) {
         this.position = new Vector2(position);
-        this.width = width;
-        this.height = height;
+        this.scale = scale;
     }
 
     public Vector2 getPosition() {
         return new Vector2(position);
     }
 
-    public float getWidth() {
-        return width;
-    }
-
-    public float getHeight() {
-        return height;
+    public float getScale() {
+        return scale;
     }
 
     public void setCameraPosition(Vector2 position) {
@@ -45,13 +40,7 @@ public class Camera {
         position.add(translation);
     }
 
-    public void setCameraSize(float width, float height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    public void resizeCameraSize(float scale) {
-        this.width *= scale;
-        this.height *= scale;
+    public void setScale(float scale) {
+        this.scale = scale;
     }
 }
