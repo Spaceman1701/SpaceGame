@@ -43,8 +43,7 @@ public class DrawPanel extends JPanel{
 
         g2.translate(getWidth()/2, getHeight()/2);
 
-        g2.setColor(Color.BLUE);
-        g2.fillRect(-getWidth()/4,-getHeight()/4, getWidth()/2, getHeight()/2);
+
 
         if (currentCamera != null) {
             g2.translate(-currentCamera.getPosition().x, -currentCamera.getPosition().y);
@@ -60,14 +59,19 @@ public class DrawPanel extends JPanel{
     }
 
     private void drawSprite(Sprite spr, Graphics2D g2) {
-        int xTransform = (int)spr.getPosition().x - (int)(spr.getWidth()/2.0f);
-        int yTransform = (int)spr.getPosition().y - (int)(spr.getHeight()/2.0f);
+        int xTransform = (int)spr.getPosition().x;// - (int)(spr.getWidth()/2.0f);
+        int yTransform = (int)spr.getPosition().y;// - (int)(spr.getHeight()/2.0f);
+
+        int xTransform2 = -(int)(spr.getWidth()/2.0f);
+        int yTransform2 = -(int)(spr.getHeight()/2.0f);
 
         g2.translate(xTransform, yTransform);
         g2.rotate(spr.getRotation());
+        g2.translate(xTransform2, yTransform2);
 
         g2.drawImage(spr.getImage(), 0, 0, (int)spr.getWidth(), (int)spr.getHeight(), null);
 
+        g2.translate(-xTransform2, -yTransform2);
         g2.rotate(-spr.getRotation());
         g2.translate(-xTransform, -yTransform);
     }
