@@ -5,20 +5,22 @@ import com.x2a.scene.Scene;
 /**
  * Created by Ethan on 12/28/2014.
  */
-public class Game {
+public abstract class Game {
 
-    Scene currentScene;
+     private Scene currentScene;
 
 
     public Game() {
         currentScene = new Scene();
     }
 
-    public void update(float timeElapsed) {
-
-    }
+    public abstract void update(float timeElapsed);
 
     public Scene getCurrentScene() {
         return currentScene;
+    }
+
+    public void setCurrentScene(Scene scene) {
+        currentScene = scene;
     }
 }

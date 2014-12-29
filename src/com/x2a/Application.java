@@ -1,6 +1,7 @@
 package com.x2a;
 
 import com.x2a.game.Game;
+import com.x2a.spacegame.SpaceGame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,7 @@ public class Application {
         Window window = new Window(X_RES, Y_RES);
         double frameTime = ONE_SECOND/(double)REFRESH_RATE;
 
-        Game game = new Game();
+        Game game = new SpaceGame();
 
 
         Timer updateTimer = new javax.swing.Timer((int)frameTime, new ActionListener() {
