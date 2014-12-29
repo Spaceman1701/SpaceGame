@@ -5,6 +5,7 @@ import com.x2a.scene.Sprite;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.TreeSet;
 
 /**
@@ -26,6 +27,7 @@ public class Renderer {
 
     public void drawSprite(Sprite spr) {
         sprites.add(spr);
+        //System.out.println("There are " + sprites.size() + " sprites");
     }
 
     protected Collection<Sprite> getSprites() {
@@ -33,7 +35,17 @@ public class Renderer {
     }
 
     protected void initSet() {
-        sprites = new TreeSet<Sprite>((Sprite spr1, Sprite spr2) ->
-                (int)(spr1.getDepth() - spr2.getDepth()));
+        sprites = new TreeSet<Sprite>(new Comparator<Sprite>() {
+            @Override
+            public int compare(Sprite spr1, Sprite spr2) {
+                float val = spr2.getDepth() - spr1.getDepth();
+
+                if (val == 0) {
+                    val = 1;
+                }
+
+                return (int)(val/Math.abs(val));
+            }
+        });
     }
 }
