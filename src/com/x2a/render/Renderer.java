@@ -20,11 +20,9 @@ public class Renderer {
         initSet();
     }
 
-
     public static Renderer getInstance() {
         return INSTANCE;
     }
-
 
     public void drawSprite(Sprite spr) {
         sprites.add(spr);
@@ -35,13 +33,7 @@ public class Renderer {
     }
 
     protected void initSet() {
-        sprites = new TreeSet<Sprite>(new Comparator<Sprite>() {
-            @Override
-            public int compare(Sprite spr1, Sprite spr2) {
-                return (int)(spr1.getDepth() - spr2.getDepth());
-            }
-        });
+        sprites = new TreeSet<Sprite>((Sprite spr1, Sprite spr2) ->
+                (int)(spr1.getDepth() - spr2.getDepth()));
     }
-
-
 }
