@@ -21,6 +21,8 @@ public abstract class Game {
     }
 
     public void setCurrentScene(Scene scene) {
+        currentScene.deactivate();
         currentScene = scene;
+        currentScene.activate();
     }
 }

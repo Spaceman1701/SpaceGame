@@ -1,6 +1,7 @@
 package com.x2a.render;
 
 import com.x2a.input.InputUtil;
+import com.x2a.input.SafeInputUtil;
 import com.x2a.scene.Camera;
 import com.x2a.scene.Sprite;
 
@@ -22,10 +23,10 @@ public class DrawPanel extends JPanel{
         this.xRes = xRes;
         this.yRes = yRes;
 
-        addMouseListener(InputUtil.getInstance());
-        addMouseMotionListener(InputUtil.getInstance());
-        addMouseWheelListener(InputUtil.getInstance());
-        addKeyListener(InputUtil.getInstance());
+        addMouseListener(SafeInputUtil.getInstance());
+        addMouseMotionListener(SafeInputUtil.getInstance());
+        addMouseWheelListener(SafeInputUtil.getInstance());
+        addKeyListener(SafeInputUtil.getInstance());
 
         setFocusable(true);
         requestFocusInWindow();
@@ -49,7 +50,7 @@ public class DrawPanel extends JPanel{
             g2.translate(-currentCamera.getPosition().x, -currentCamera.getPosition().y);
             g2.scale(1.0 / (double) currentCamera.getScale(), 1.0 / (double) currentCamera.getScale());
         } else {
-            System.err.println("Camera is null. Probably hasn't been initialized yet. This is expected to occur twice. If error is happening every frame then you done fucked it up. This message is from DrawPanel.paintComponent.");
+            System.err.println("Camera is null. Probably hasn't been initialized yet. This is expected to occur twice. If it occurs every frame there is a problem. This message is from DrawPanel.paintComponent.");
         }
 
         for(Sprite spr : Renderer.getInstance().getSprites()) {

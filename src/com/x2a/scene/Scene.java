@@ -18,4 +18,14 @@ public class Scene extends Node{
     public Camera getCamera() {
         return camera;
     }
+
+    @Override
+    public void activate() {
+        super.activate();
+    }
+
+    @Override
+    public void deactivate() {
+        super.deactivate();
+    }
 }

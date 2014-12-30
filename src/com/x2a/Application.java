@@ -1,6 +1,7 @@
 package com.x2a;
 
 import com.x2a.game.Game;
+import com.x2a.input.SafeInputUtil;
 import com.x2a.spacegame.SpaceGame;
 
 import javax.swing.*;
@@ -41,6 +42,7 @@ public class Application {
                 float timeElapsed = (float)(Math.abs(System.nanoTime() - lastTime)/ONE_MILLISECOND_NANOSECONDS);
 
                 //System.out.println(Math.abs(timeElapsed);
+                SafeInputUtil.getInstance().dispatchEvents();
                 game.update(timeElapsed);
                 window.setCurrentCamera(game.getCurrentScene().getCamera());
                 window.run();

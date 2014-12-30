@@ -47,6 +47,7 @@ public abstract class Sprite extends Node{
      *
      * @param timeElapsed time elapsed in milliseconds
      */
+    @Override
     public abstract void update(float timeElapsed);
 
     public float getDepth() {

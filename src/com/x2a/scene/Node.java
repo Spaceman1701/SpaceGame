@@ -11,6 +11,8 @@ public class Node {
     private Node parent;
     private List<Node> children;
 
+    private boolean activated;
+
     public Node() {
         this(null);
     }
@@ -31,4 +33,27 @@ public class Node {
     public void update(float timeElapsed) {
         children.forEach((Node child) -> child.update(timeElapsed));
     }
+
+    protected void onActivation() {
+        children.forEach((Node child) -> child.onActivation());
+        activated = true;
+    }
+
+    protected void onDeactivation() {
+        children.forEach((Node child) -> child.onDeactivation());
+        activated = false;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    protected void activate() {
+        onActivation();
+    }
+
+    protected void deactivate() {
+        onDeactivation();
+    }
+
 }
