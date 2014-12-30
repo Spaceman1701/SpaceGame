@@ -26,6 +26,7 @@ public class Player extends Node{
 
     public Player() {
         playerWarp = new PlayerWarp();
+        playerSpace = new PlayerSpace();
 
         state = PlayerState.WARP;
     }

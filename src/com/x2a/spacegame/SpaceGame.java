@@ -25,8 +25,6 @@ public class SpaceGame extends Game {
         spaceScene = new SpaceArea(this);
         warpScene = new WarpArea(this);
 
-        spaceScene.getChildren().add(new TestSprite(new Vector2(0, 0), "test", 1.0f));
-
         initDebugCommands();
     }
 

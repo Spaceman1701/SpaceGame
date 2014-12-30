@@ -107,6 +107,10 @@ public abstract class Sprite extends Node {
         this.rotation = rotation;
     }
 
+    public void rotate(float amount) {
+        rotation += amount;
+    }
+
     public BufferedImage getImage() {
         return image;
     }
