@@ -26,7 +26,6 @@ public class SpaceGame extends Game {
         warpScene = new WarpArea(this);
 
         spaceScene.getChildren().add(new TestSprite(new Vector2(0, 0), "test", 1.0f));
-        planetScene.getChildren().add(new TestSprite(new Vector2(0, 0), "stuff", 1.0f, new PlanetGeneration().generatePlanetImage(100, 100)));
 
         initDebugCommands();
     }
