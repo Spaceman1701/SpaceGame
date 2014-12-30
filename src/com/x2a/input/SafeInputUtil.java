@@ -1,24 +1,22 @@
 package com.x2a.input;
 
 import java.awt.event.*;
-import java.util.HashSet;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * Created by Ethan on 12/29/2014.
  *
- * This class is designed to be a thread safe version of InputUtil. It uses Queues to get events from the Swing even thread to the game thread. It also uses HashSet instead of ArrayList to improve
- * performance
+ * This class is designed to be a thread safe version of InputUtil. It uses Queues to get events from the Swing even thread to the game thread.
  */
 public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 
     private static SafeInputUtil INSTANCE = new SafeInputUtil();
 
-    private Set<MouseEventListener> mouseEventListeners;
+    private List<MouseEventListener> mouseEventListeners;
 
-    private Set<KeyEventListener> keyEventListeners;
+    private List<KeyEventListener> keyEventListeners;
 
     private Queue<MouseEventData> pendingMouseEvents;
 
@@ -26,8 +24,8 @@ public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseW
 
 
     private SafeInputUtil() {
-        mouseEventListeners = new HashSet<MouseEventListener>();
-        keyEventListeners = new HashSet<KeyEventListener>();
+        mouseEventListeners = new ArrayList<MouseEventListener>();
+        keyEventListeners = new ArrayList<KeyEventListener>();
 
         pendingKeyEvents = new ConcurrentLinkedQueue<KeyEventData>();
         pendingMouseEvents = new ConcurrentLinkedQueue<MouseEventData>();
@@ -45,8 +43,8 @@ public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseW
     private void dispatchMouseEvents() {
         MouseEventData data;
         while ((data = pendingMouseEvents.poll()) != null) {
-            for (MouseEventListener l : mouseEventListeners) {
-                l.onMouseEvent(data);
+            for (int i = 0; i<mouseEventListeners.size(); i++) {
+                mouseEventListeners.get(i).onMouseEvent(data);
             }
         }
     }
@@ -54,8 +52,8 @@ public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseW
     private void dispatchKeyEvents() {
         KeyEventData data;
         while ((data = pendingKeyEvents.poll()) != null) {
-            for (KeyEventListener l : keyEventListeners) {
-                l.onKeyEvent(data);
+            for (int i = 0; i<keyEventListeners.size(); i++) {
+                keyEventListeners.get(i).onKeyEvent(data);
             }
         }
     }
