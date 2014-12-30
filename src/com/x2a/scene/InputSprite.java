@@ -32,7 +32,7 @@ public abstract class InputSprite extends Sprite {
     @Override
     protected void onActivation() {
         SafeInputUtil.getInstance().registerKeyEventListener(keyEventListener);
-        //InputUtil.getInstance().registerMouseEventListener(mouseEventListener);
+        SafeInputUtil.getInstance().registerMouseEventListener(mouseEventListener);
     }
 
     @Override

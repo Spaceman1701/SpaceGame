@@ -12,6 +12,8 @@ public class KeyEventData {
     private boolean isCtrlDown;
     private boolean isAltDown;
 
+    private long eventTime;
+
     public KeyEventData(KeyEventType eventType, char keyChar, int keyCode, boolean isShiftDown, boolean isCtrlDown, boolean isAltDown) {
         this.eventType = eventType;
         this.keyChar = keyChar;
@@ -19,6 +21,12 @@ public class KeyEventData {
         this.isShiftDown = isShiftDown;
         this.isCtrlDown = isCtrlDown;
         this.isAltDown = isAltDown;
+        eventTime = System.nanoTime();
+    }
+
+    public KeyEventData(KeyEventType eventType, char keyChar, int keyCode, boolean isShiftDown, boolean isCtrlDown, boolean isAltDown, long nanoTime) { //Might be more accurate to pass time to event
+        this(eventType, keyChar, keyCode, isShiftDown, isCtrlDown, isAltDown);
+        this.eventTime = nanoTime;
     }
 
     public KeyEventType getEventType() {
@@ -43,5 +51,9 @@ public class KeyEventData {
 
     public boolean isAltDown() {
         return isAltDown;
+    }
+
+    public long getEventTime() {
+        return eventTime;
     }
 }

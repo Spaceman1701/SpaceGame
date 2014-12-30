@@ -20,7 +20,6 @@ public class TestSprite extends InputSprite {
     @Override
     public void update(float timeElapsed) {
 
-        //System.out.println(getName() + "update called");
     }
 
     @Override
@@ -34,6 +33,7 @@ public class TestSprite extends InputSprite {
         if (data.getEventType() == KeyEventType.KEY_PRESSED) {
             if (Character.toLowerCase(data.getKeyChar()) == 'r') {
                 setRotation(getRotation() + (float)Math.toRadians(10));
+                System.out.println(Math.abs(System.nanoTime() - data.getEventTime())/1000000.0 + " milliseconds since keypress");
             }
         }
     }

@@ -59,8 +59,11 @@ public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseW
     }
 
     private void handleKeyEvent(KeyEventType type, KeyEvent e) {
-        pendingKeyEvents.add(new KeyEventData(type, e.getKeyChar(), e.getKeyCode(),
-                        e.isShiftDown(), e.isControlDown(), e.isAltDown()));
+        KeyEventData data = new KeyEventData(type, e.getKeyChar(), e.getKeyCode(),
+                        e.isShiftDown(), e.isControlDown(), e.isAltDown(), System.nanoTime());
+        for (int i = 0; i<keyEventListeners.size(); i++) {
+            keyEventListeners.get(i).onKeyEvent(data);
+        }
     }
 
     private void handleMouseEvent(MouseEventType type, MouseEvent e) {
