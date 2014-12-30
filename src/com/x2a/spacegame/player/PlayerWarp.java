@@ -1,5 +1,6 @@
 package com.x2a.spacegame.player;
 
+import com.x2a.Application;
 import com.x2a.input.KeyEventData;
 import com.x2a.input.MouseEventData;
 import com.x2a.input.MouseEventType;
@@ -26,7 +27,7 @@ public class PlayerWarp extends InputSprite{
     public PlayerWarp() {
         super(new Vector2(), 50, 50, 0, 0, IMAGE_LOCATION, "SPR_PLAYER_WARP");
 
-        target = new Vector2();
+        target = new Vector2(Application.X_RES/2 - 55, Application.Y_RES/2 - 55);
         maxSpeed = INITIAL_MAX_SPEED;
     }
 
