@@ -14,7 +14,7 @@ public class TestSprite extends InputSprite {
 
 
     public TestSprite(Vector2 position, String name, float depth) {
-        super(position, 300, 300, 0, depth, "res/images/sprites/Rotation Test.png", name);
+        super(position, 300, 300, 0, depth, "res/images/sprites/Spaceship 2.png", name);
     }
 
     @Override
@@ -33,7 +33,6 @@ public class TestSprite extends InputSprite {
         if (data.getEventType() == KeyEventType.KEY_PRESSED) {
             if (Character.toLowerCase(data.getKeyChar()) == 'r') {
                 setRotation(getRotation() + (float)Math.toRadians(10));
-                System.out.println(Math.abs(System.nanoTime() - data.getEventTime())/1000000.0 + " milliseconds since keypress");
             }
         }
     }

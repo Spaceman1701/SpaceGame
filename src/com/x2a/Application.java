@@ -16,8 +16,8 @@ public class Application {
     private static final double ONE_MILLISECOND_NANOSECONDS = 1000000.0;
     private static final double ONE_SECOND = 1000;
 
-    private static final int X_RES = 768;
-    private static final int Y_RES = 768;
+    public static final int X_RES = 768;
+    public static final int Y_RES = 768;
 
     private static final int REFRESH_RATE = 60;
 

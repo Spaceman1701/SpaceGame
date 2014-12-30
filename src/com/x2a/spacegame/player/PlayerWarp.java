@@ -8,9 +8,12 @@ import com.x2a.scene.InputSprite;
 /**
  * Created by Ethan on 12/29/2014.
  */
-public class PlayerSpace extends InputSprite {
-    public PlayerSpace(Vector2 position, float height, float width, float rotation, float depth, String imageLocation, String name) {
-        super(position, height, width, rotation, depth, imageLocation, name);
+public class PlayerWarp extends InputSprite{
+
+    private static final String IMAGE_LOCATION = "res/images/sprites/Spaceship 2.png";
+
+    public PlayerWarp() {
+        super(new Vector2(), 100, 100, 0, 0, IMAGE_LOCATION, "SPR_PLAYER_WARP");
     }
 
     @Override
