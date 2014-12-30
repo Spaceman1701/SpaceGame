@@ -5,7 +5,6 @@ package com.x2a.spacegame;
  */
 public class PlanetArea extends Area {
 
-
     public PlanetArea(SpaceGame game) {
         super(game);
     }

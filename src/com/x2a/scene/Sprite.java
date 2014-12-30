@@ -11,22 +11,19 @@ import java.io.IOException;
 /**
  * Created by Ethan on 12/28/2014.
  */
-public abstract class Sprite extends Node{
+public abstract class Sprite extends Node {
 
     private float depth; //Higher depth = further from camera.
 
     private Vector2 position;
-
-    private float height;
     private float width;
-
+    private float height;
     private float rotation;
 
     private BufferedImage image;
-
     private final String name;
 
-    public Sprite(Vector2 position, float height, float width, float rotation, float depth, String imageLocation, String name) {
+    public Sprite(Vector2 position, float width, float height, float rotation, float depth, String imageLocation, String name) {
         try {
             image = ImageIO.read(new File(imageLocation));
         } catch (IOException e) {
@@ -35,8 +32,20 @@ public abstract class Sprite extends Node{
         }
 
         this.position = new Vector2(position);
-        this.height = height;
         this.width = width;
+        this.height = height;
+        this.rotation = rotation;
+        this.depth = depth;
+
+        this.name = name;
+    }
+
+    public Sprite(Vector2 position, float width, float height, float rotation, float depth, BufferedImage image, String name) {
+        this.image = image;
+
+        this.position = new Vector2(position);
+        this.width = width;
+        this.height = height;
         this.rotation = rotation;
         this.depth = depth;
 

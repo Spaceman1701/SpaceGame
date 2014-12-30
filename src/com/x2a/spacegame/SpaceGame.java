@@ -4,6 +4,7 @@ import com.x2a.game.Game;
 import com.x2a.input.*;
 import com.x2a.math.Vector2;
 import com.x2a.scene.Node;
+import com.x2a.spacegame.scenes.planet.PlanetGeneration;
 
 /**
  * Created by Ethan on 12/28/2014.
@@ -25,7 +26,7 @@ public class SpaceGame extends Game {
         warpScene = new WarpArea(this);
 
         spaceScene.getChildren().add(new TestSprite(new Vector2(0, 0), "test", 1.0f));
-
+        planetScene.getChildren().add(new TestSprite(new Vector2(0, 0), "stuff", 1.0f, new PlanetGeneration().generatePlanetImage(100, 100)));
 
         initDebugCommands();
     }

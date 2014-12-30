@@ -5,6 +5,7 @@ import com.x2a.math.Vector2;
 import com.x2a.scene.InputSprite;
 import com.x2a.scene.Sprite;
 
+import java.awt.image.BufferedImage;
 import java.util.Vector;
 
 /**
@@ -12,9 +13,12 @@ import java.util.Vector;
  */
 public class TestSprite extends InputSprite {
 
-
     public TestSprite(Vector2 position, String name, float depth) {
         super(position, 300, 300, 0, depth, "res/images/sprites/Spaceship 2.png", name);
+    }
+
+    public TestSprite(Vector2 position, String name, float depth, BufferedImage image) {
+        super(position, 600, 600, 0, depth, image, name);
     }
 
     @Override
