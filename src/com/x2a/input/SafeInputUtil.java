@@ -18,58 +18,33 @@ public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseW
 
     private List<KeyEventListener> keyEventListeners;
 
-    private Queue<MouseEventData> pendingMouseEvents;
-
-    private Queue<KeyEventData> pendingKeyEvents;
-
 
     private SafeInputUtil() {
         mouseEventListeners = new ArrayList<MouseEventListener>();
         keyEventListeners = new ArrayList<KeyEventListener>();
-
-        pendingKeyEvents = new ConcurrentLinkedQueue<KeyEventData>();
-        pendingMouseEvents = new ConcurrentLinkedQueue<MouseEventData>();
     }
 
     public static SafeInputUtil getInstance() {
         return INSTANCE;
     }
 
-    public void dispatchEvents() {
-        dispatchKeyEvents();
-        dispatchMouseEvents();
-    }
-
-    private void dispatchMouseEvents() {
-        MouseEventData data;
-        while ((data = pendingMouseEvents.poll()) != null) {
-            for (int i = 0; i<mouseEventListeners.size(); i++) {
-                mouseEventListeners.get(i).onMouseEvent(data);
-            }
-        }
-    }
-
-    private void dispatchKeyEvents() {
-        KeyEventData data;
-        while ((data = pendingKeyEvents.poll()) != null) {
-            for (int i = 0; i<keyEventListeners.size(); i++) {
-                keyEventListeners.get(i).onKeyEvent(data);
-            }
-        }
-    }
-
     private void handleKeyEvent(KeyEventType type, KeyEvent e) {
         KeyEventData data = new KeyEventData(type, e.getKeyChar(), e.getKeyCode(),
                         e.isShiftDown(), e.isControlDown(), e.isAltDown(), System.nanoTime());
+
         for (int i = 0; i<keyEventListeners.size(); i++) {
             keyEventListeners.get(i).onKeyEvent(data);
         }
     }
 
     private void handleMouseEvent(MouseEventType type, MouseEvent e) {
-        pendingMouseEvents.add(new MouseEventData(type, e.getX(), e.getY(),
+       MouseEventData data = new MouseEventData(type, e.getX(), e.getY(),
                 e.getXOnScreen(), e.getYOnScreen(), e.getButton(), 0,
-                e.isShiftDown(), e.isControlDown(), e.isAltDown()));
+                e.isShiftDown(), e.isControlDown(), e.isAltDown());
+
+        for (int i = 0; i<mouseEventListeners.size(); i++) {
+            mouseEventListeners.get(i).onMouseEvent(data);
+        }
     }
 
     public void registerMouseEventListener(MouseEventListener listener) {
