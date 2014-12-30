@@ -18,10 +18,14 @@ public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseW
 
     private List<KeyEventListener> keyEventListeners;
 
+    private HashSet<Character> downKeys;
+
 
     private SafeInputUtil() {
         mouseEventListeners = new ArrayList<MouseEventListener>();
         keyEventListeners = new ArrayList<KeyEventListener>();
+
+        downKeys = new HashSet<Character>();
     }
 
     public static SafeInputUtil getInstance() {
@@ -31,6 +35,12 @@ public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseW
     private void handleKeyEvent(KeyEventType type, KeyEvent e) {
         KeyEventData data = new KeyEventData(type, e.getKeyChar(), e.getKeyCode(),
                         e.isShiftDown(), e.isControlDown(), e.isAltDown(), System.nanoTime());
+
+        if (type == KeyEventType.KEY_PRESSED) {
+            downKeys.add(new Character(Character.toLowerCase(data.getKeyChar())));
+        } else if (type == KeyEventType.KEY_RELEASED) {
+            downKeys.remove(new Character(Character.toLowerCase(data.getKeyChar())));
+        }
 
         for (int i = 0; i<keyEventListeners.size(); i++) {
             keyEventListeners.get(i).onKeyEvent(data);
@@ -45,6 +55,10 @@ public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseW
         for (int i = 0; i<mouseEventListeners.size(); i++) {
             mouseEventListeners.get(i).onMouseEvent(data);
         }
+    }
+
+    public boolean isKeyDown(char key) {
+        return downKeys.contains(new Character(Character.toLowerCase(key)));
     }
 
     public void registerMouseEventListener(MouseEventListener listener) {
