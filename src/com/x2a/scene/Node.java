@@ -48,11 +48,11 @@ public class Node {
         return activated;
     }
 
-    protected void activate() {
+    public void activate() {
         onActivation();
     }
 
-    protected void deactivate() {
+    public void deactivate() {
         onDeactivation();
     }
 

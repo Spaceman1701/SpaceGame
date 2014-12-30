@@ -1,5 +1,6 @@
 package com.x2a.input;
 
+import com.x2a.Application;
 import com.x2a.math.Vector2;
 
 /**
@@ -23,7 +24,7 @@ public class MouseEventData {
 
     public MouseEventData(MouseEventType eventType, float posX, float posY, float screenX, float screenY, int mouseButton, float mouseWheelRotation, boolean isShiftDown, boolean isCtrlDown, boolean isAltDown) {
         this.eventType = eventType;
-        this.position = new Vector2(posX, posY);
+        this.position = new Vector2(posX- Application.X_RES/2, posY-Application.Y_RES/2);
         this.screenPosition = new Vector2(screenX, screenY);
         this.mouseButton = mouseButton;
         this.mouseWheelRotation = mouseWheelRotation;
