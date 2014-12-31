@@ -54,4 +54,8 @@ public class MapPlanet extends InputSprite{
     public void update(float timeElapsed) {
         super.update(timeElapsed);
     }
+
+    public int getId() {
+        return id;
+    }
 }

@@ -1,5 +1,10 @@
 package com.x2a.spacegame;
 
+import com.x2a.game.Game;
+import com.x2a.input.KeyEventData;
+import com.x2a.input.KeyEventListener;
+import com.x2a.input.KeyEventType;
+import com.x2a.input.SafeInputUtil;
 import com.x2a.math.Vector2;
 import com.x2a.scene.InputSprite;
 import com.x2a.scene.Node;
@@ -24,11 +29,26 @@ public class Player extends Node{
 
     private PlayerState state;
 
-    public Player() {
+    private Game game;
+
+    public Player(Game game) {
         playerWarp = new PlayerWarp();
-        playerSpace = new PlayerSpace();
+        playerSpace = new PlayerSpace(this);
 
         state = PlayerState.WARP;
+
+        this.game = game;
+
+        SafeInputUtil.getInstance().registerKeyEventListener(new KeyEventListener() {
+            @Override
+            public void onKeyEvent(KeyEventData data) {
+               // if (isActivated()) {
+                    if (data.getEventType() == KeyEventType.KEY_PRESSED && data.getKeyChar() == Character.toLowerCase('x')) {
+                        System.out.println(state);
+                    }
+               // }
+            }
+        });
     }
 
     public void setState(PlayerState state) {
@@ -67,10 +87,17 @@ public class Player extends Node{
         getSubPlayer(state).setPosition(position);
     }
 
-    public Vector2 getPosition(Vector2 position) {
+    public Vector2 getPosition() {
+        System.out.println(state);
         return getSubPlayer(state).getPosition();
     }
 
+    public Vector2 getPosition(PlayerState state) {
+        return getSubPlayer(state).getPosition();
+    }
 
+    public Game getGame() {
+        return game;
+    }
 
 }

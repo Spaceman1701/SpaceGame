@@ -19,7 +19,7 @@ public class SpaceGame extends Game {
 
 
     public SpaceGame() {
-        player = new Player();
+        player = new Player(this);
 
         planetScene = new PlanetArea(this);
         spaceScene = new SpaceArea(this);
@@ -53,5 +53,19 @@ public class SpaceGame extends Game {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void transitionTo(GameArea scene) {
+        switch (scene) {
+            case WARP:
+                setCurrentScene(warpScene);
+                break;
+            case SPACE:
+                setCurrentScene(spaceScene);
+                break;
+            case GROUND:
+                setCurrentScene(planetScene);
+                break;
+        }
     }
 }

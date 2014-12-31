@@ -10,6 +10,8 @@ import com.x2a.scene.Sprite;
 public class Background extends Sprite{
     public Background(String imageLocation, String name) {
         super(new Vector2(), Application.X_RES, Application.Y_RES, 0, 10000, imageLocation, name);
+        setWidth(getImage().getWidth());
+        setHeight(getImage().getHeight());
     }
 
     @Override

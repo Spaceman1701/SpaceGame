@@ -9,6 +9,7 @@ import com.x2a.render.Text;
 import com.x2a.render.shapes.Rectangle;
 import com.x2a.scene.InputSprite;
 import com.x2a.scene.Node;
+import com.x2a.spacegame.Player;
 
 import java.awt.*;
 
@@ -28,8 +29,12 @@ public class PlayerSpace extends InputSprite {
 
     private float speed = 0;
 
-    public PlayerSpace() {
+    private final Player player;
+
+    public PlayerSpace(Player player) {
         super(new Vector2(), 150, 150, 0, 1f, IMAGE_LOCATION, "SPR_PLAYER_SPACE", true);
+
+        this.player = player;
     }
 
     @Override
@@ -66,5 +71,11 @@ public class PlayerSpace extends InputSprite {
             speed = maxSpeed * (Math.abs(speed)/speed);
         }
         setPosition(getPosition().add(GameMath.polarToVector(speed, getRotation() - (float)(Math.PI/2.0))));
+        player.getGame().getCurrentScene().getCamera().setCameraPosition(getPosition());
+    }
+
+    @Override
+    protected void onDeactivation() {
+        player.getGame().getCurrentScene().getCamera().setCameraPosition(new Vector2());
     }
 }
