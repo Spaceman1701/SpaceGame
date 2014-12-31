@@ -13,7 +13,7 @@ public class Renderer {
 
     private static final Renderer INSTANCE = new Renderer();
 
-    private TreeSet<Sprite> sprites;
+
 
     private TreeSet<Primitive> primitives;
 
@@ -25,37 +25,12 @@ public class Renderer {
         return INSTANCE;
     }
 
-    public void drawSprite(Sprite spr) {
-        sprites.add(spr);
-        //System.out.println("There are " + sprites.size() + " sprites");
-    }
-
     public void drawPrimitive(Primitive p) {
         primitives.add(p);
     }
 
-    protected Collection<Sprite> getSprites() {
-        return sprites;
-    }
-
     protected void initSet() {
-        initSpriteSet();
         initShapeSet();
-    }
-
-    private void initSpriteSet() {
-        sprites = new TreeSet<Sprite>(new Comparator<Sprite>() {
-            @Override
-            public int compare(Sprite spr1, Sprite spr2) {
-                float val = spr2.getDepth() - spr1.getDepth(); //Higher depth draws first
-
-                if (val == 0) {
-                    val = 1;
-                }
-
-                return (int)(val/Math.abs(val));
-            }
-        });
     }
 
     private void initShapeSet() {

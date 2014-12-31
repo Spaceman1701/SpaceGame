@@ -30,7 +30,7 @@ public class Text implements Primitive {
     }
 
     @Override
-    public void draw(Graphics2D g2) {
+    public void doDraw(Graphics2D g2) {
         g2.setColor(color);
 
         float xTransform = getCenter().x;

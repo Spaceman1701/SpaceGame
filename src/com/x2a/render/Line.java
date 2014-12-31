@@ -28,7 +28,7 @@ public class Line implements Primitive {
 
 
     @Override
-    public void draw(Graphics2D g2) {
+    public void doDraw(Graphics2D g2) {
         g2.setColor(color);
         g2.drawLine((int)p1.x, (int)p1.y, (int)p2.x, (int)p2.y);
     }

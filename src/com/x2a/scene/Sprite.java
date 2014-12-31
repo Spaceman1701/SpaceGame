@@ -1,9 +1,11 @@
 package com.x2a.scene;
 
 import com.x2a.math.Vector2;
+import com.x2a.render.Primitive;
 import com.x2a.render.Renderer;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +13,7 @@ import java.io.IOException;
 /**
  * Created by Ethan on 12/28/2014.
  */
-public abstract class Sprite extends Node {
+public abstract class Sprite extends Node implements Primitive {
 
     private float depth; //Higher depth = further from camera.
 
@@ -142,6 +144,25 @@ public abstract class Sprite extends Node {
     }
 
     public void draw() {
-        Renderer.getInstance().drawSprite(this);
+        Renderer.getInstance().drawPrimitive(this);
+    }
+
+    @Override
+    public void doDraw(Graphics2D g2) {
+        float xTransform = getPosition().x;// - (int)(spr.getWidth()/2.0f);
+        float yTransform = getPosition().y;// - (int)(spr.getHeight()/2.0f);
+
+        float xTransform2 = -(getWidth()/2.0f);
+        float yTransform2 = -(getHeight()/2.0f);
+
+        g2.translate(xTransform, yTransform);
+        g2.rotate(getRotation());
+        g2.translate(xTransform2, yTransform2);
+
+        g2.drawImage(getImage(), 0, 0, (int)getWidth(), (int)getHeight(), null);
+
+        g2.translate(-xTransform2, -yTransform2);
+        g2.rotate(-getRotation());
+        g2.translate(-xTransform, -yTransform);
     }
 }

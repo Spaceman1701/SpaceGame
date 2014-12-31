@@ -29,7 +29,7 @@ public class TestSprite extends InputSprite {
     @Override
     public void draw() {
         super.draw();
-       // System.out.println(getName() + "draw called");
+       // System.out.println(getName() + "doDraw called");
     }
 
     @Override
