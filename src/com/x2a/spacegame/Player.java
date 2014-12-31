@@ -88,7 +88,6 @@ public class Player extends Node{
     }
 
     public Vector2 getPosition() {
-        System.out.println(state);
         return getSubPlayer(state).getPosition();
     }
 
