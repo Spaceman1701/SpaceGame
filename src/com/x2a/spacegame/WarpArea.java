@@ -2,10 +2,12 @@ package com.x2a.spacegame;
 
 import com.x2a.Application;
 import com.x2a.math.Vector2;
+import com.x2a.spacegame.warp.InfoWindow;
 import com.x2a.spacegame.warp.MapEarth;
 import com.x2a.spacegame.warp.MapPlanet;
 import com.x2a.spacegame.warp.WarpBackground;
 
+import java.awt.*;
 import java.util.Random;
 
 /**

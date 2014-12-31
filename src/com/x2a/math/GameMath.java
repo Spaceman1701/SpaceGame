@@ -17,4 +17,11 @@ public class GameMath {
         return (float)Math.sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
     }
 
+    public static boolean insideAABB(Vector2 center, float width, float height, Vector2 point) {
+        Vector2 topLeft = new Vector2(center).sub(new Vector2(width/2.0f, height/2.0f));
+        Vector2 bottomRight = new Vector2(center).add(new Vector2(width/2.0f, height/2.0f));
+
+        return (point.x > topLeft.x && point.y > topLeft.y && point.x < bottomRight.x && point.y < bottomRight.y);
+    }
+
 }
