@@ -10,7 +10,7 @@ import com.x2a.scene.InputSprite;
  */
 public class PlayerSpace extends InputSprite {
 
-    private static final String IMAGE_LOCATION = "res/images/sprites/Spaceship 2.png";
+    private static final String IMAGE_LOCATION = "res/images/sprites/Spaceship.jpg";
 
     private static final char FORWARD = 'w';
     private static final char BACKWARD = 's';
@@ -22,7 +22,7 @@ public class PlayerSpace extends InputSprite {
     private float speed = 0;
 
     public PlayerSpace() {
-        super(new Vector2(), 150, 150, 0, 1f, IMAGE_LOCATION, "SPR_PLAYER_SPACE");
+        super(new Vector2(), 150, 150, 0, 1f, IMAGE_LOCATION, "SPR_PLAYER_SPACE", true);
     }
 
     @Override

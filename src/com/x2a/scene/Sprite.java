@@ -24,6 +24,22 @@ public abstract class Sprite extends Node {
     private final String name;
 
     public Sprite(Vector2 position, float width, float height, float rotation, float depth, String imageLocation, String name) {
+       this(position, width, height, rotation, depth, imageLocation, name, true);
+    }
+
+    public Sprite(Vector2 position, float width, float height, float rotation, float depth, BufferedImage image, String name) {
+        this.image = image;
+
+        this.position = new Vector2(position);
+        this.width = width;
+        this.height = height;
+        this.rotation = rotation;
+        this.depth = depth;
+
+        this.name = name;
+    }
+
+    public Sprite(Vector2 position, float width, float height, float rotation, float depth, String imageLocation, String name, boolean lockAspect) {
         try {
             image = ImageIO.read(new File(imageLocation));
         } catch (IOException e) {
@@ -38,18 +54,20 @@ public abstract class Sprite extends Node {
         this.depth = depth;
 
         this.name = name;
-    }
 
-    public Sprite(Vector2 position, float width, float height, float rotation, float depth, BufferedImage image, String name) {
-        this.image = image;
+        if (lockAspect) {
 
-        this.position = new Vector2(position);
-        this.width = width;
-        this.height = height;
-        this.rotation = rotation;
-        this.depth = depth;
+            if (image.getWidth() > image.getHeight()) {
+                float aspect = (float) image.getHeight() / (float) image.getWidth();
+                System.out.println("Sprite aspect is: " + aspect);
+                this.height *= aspect;
+            } else {
+                float aspect = (float) image.getWidth() / (float) image.getHeight();
+                System.out.println("Sprite aspect is: " + aspect);
+                this.width *= aspect;
+            }
 
-        this.name = name;
+        }
     }
 
     /**

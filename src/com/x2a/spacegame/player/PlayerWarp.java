@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
  */
 public class PlayerWarp extends InputSprite{
 
-    private static final String IMAGE_LOCATION = "res/images/sprites/Spaceship 2.png";
+    private static final String IMAGE_LOCATION = "res/images/sprites/Spaceship.jpg";
     private static final float INITIAL_MAX_SPEED = 2f;
 
 

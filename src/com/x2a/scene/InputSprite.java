@@ -16,24 +16,22 @@ public abstract class InputSprite extends Sprite {
     public InputSprite(Vector2 position, float width, float height, float rotation, float depth, String imageLocation, String name) {
         super(position, width, height, rotation, depth, imageLocation, name);
 
-        keyEventListener = new KeyEventListener() {
-            @Override
-            public void onKeyEvent(KeyEventData data) {
-                InputSprite.this.onKeyEvent(data);
-            }
-        };
+        initListeners();
+    }
 
-        mouseEventListener = new MouseEventListener() {
-            @Override
-            public void onMouseEvent(MouseEventData data) {
-                InputSprite.this.onMouseEvent(data);
-            }
-        };
+    public InputSprite(Vector2 position, float width, float height, float rotation, float depth, String imageLocation, String name, boolean lockAspect) {
+        super(position, width, height, rotation, depth, imageLocation, name, lockAspect);
+
+        initListeners();
     }
 
     public InputSprite(Vector2 position, float width, float height, float rotation, float depth, BufferedImage image, String name) {
         super(position, width, height, rotation, depth, image, name);
 
+        initListeners();
+    }
+
+    private void initListeners() {
         keyEventListener = new KeyEventListener() {
             @Override
             public void onKeyEvent(KeyEventData data) {
