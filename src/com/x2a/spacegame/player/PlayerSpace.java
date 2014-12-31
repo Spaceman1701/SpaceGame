@@ -32,7 +32,7 @@ public class PlayerSpace extends InputSprite {
     private final Player player;
 
     public PlayerSpace(Player player) {
-        super(new Vector2(), 150, 150, 0, 1f, IMAGE_LOCATION, "SPR_PLAYER_SPACE", true);
+        super(new Vector2(), 100, 100, 0, 1f, IMAGE_LOCATION, "SPR_PLAYER_SPACE", true);
 
         this.player = player;
     }
