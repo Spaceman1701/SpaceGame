@@ -3,7 +3,14 @@ package com.x2a.spacegame.player;
 import com.x2a.input.*;
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
+import com.x2a.render.Line;
+import com.x2a.render.Renderer;
+import com.x2a.render.Text;
+import com.x2a.render.shapes.Rectangle;
 import com.x2a.scene.InputSprite;
+import com.x2a.scene.Node;
+
+import java.awt.*;
 
 /**
  * Created by Ethan on 12/29/2014.
@@ -37,6 +44,8 @@ public class PlayerSpace extends InputSprite {
 
     @Override
     public void update(float timeElapsed) {
+        super.update(timeElapsed);
+
         SafeInputUtil input = SafeInputUtil.getInstance();
 
         if (input.isKeyDown(FORWARD)) {
