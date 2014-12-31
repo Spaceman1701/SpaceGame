@@ -54,6 +54,11 @@ public class StaticImage implements DrawImage {
         return image.getHeight();
     }
 
+    @Override
+    public void update(float timeElapsed) {
+
+    }
+
     public Raster getData() {
         return image.getData();
     }
