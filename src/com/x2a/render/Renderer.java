@@ -15,7 +15,7 @@ public class Renderer {
 
     private TreeSet<Sprite> sprites;
 
-    private TreeSet<Primitive> shapes;
+    private TreeSet<Primitive> primitives;
 
     private Renderer() {
         initSet();
@@ -28,6 +28,10 @@ public class Renderer {
     public void drawSprite(Sprite spr) {
         sprites.add(spr);
         //System.out.println("There are " + sprites.size() + " sprites");
+    }
+
+    public void drawPrimitive(Primitive p) {
+        primitives.add(p);
     }
 
     protected Collection<Sprite> getSprites() {
@@ -55,7 +59,7 @@ public class Renderer {
     }
 
     private void initShapeSet() {
-        shapes = new TreeSet<Primitive>(new Comparator<Primitive>() {
+        primitives = new TreeSet<Primitive>(new Comparator<Primitive>() {
             @Override
             public int compare(Primitive p1, Primitive p2) {
                 float val = p2.getDepth() - p1.getDepth(); //Higher depth draws first
@@ -67,5 +71,9 @@ public class Renderer {
                 return (int)(val/Math.abs(val));
             }
         });
+    }
+
+    public Collection<Primitive> getPrimitives() {
+        return primitives;
     }
 }

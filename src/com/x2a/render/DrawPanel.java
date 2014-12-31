@@ -56,6 +56,11 @@ public class DrawPanel extends JPanel{
         for(Sprite spr : Renderer.getInstance().getSprites()) {
             drawSprite(spr, g2);
         }
+
+        for (Primitive p : Renderer.getInstance().getPrimitives()) {
+            p.draw(g2);
+        }
+
         Renderer.getInstance().initSet();
     }
 
