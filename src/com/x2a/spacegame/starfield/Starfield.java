@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Starfield extends Node{
 
     private static final int TILE_SIZE = 300;
-    private static final int TILE_STAR_NUMBER = 10;
+    private static final int TILE_STAR_NUMBER = 4;
 
     private Camera camera;
 
