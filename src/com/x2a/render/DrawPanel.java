@@ -43,6 +43,8 @@ public class DrawPanel extends JPanel{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2.clearRect(0, 0, getWidth(), getHeight());
+        g2.setColor(Color.BLACK);
+        g2.fillRect(0, 0, getWidth(), getHeight());
 
         g2.translate(getWidth()/2, getHeight()/2);
 

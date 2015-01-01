@@ -2,12 +2,15 @@ package com.x2a.spacegame.player;
 
 import com.x2a.Application;
 import com.x2a.input.KeyEventData;
+import com.x2a.input.KeyEventType;
 import com.x2a.input.MouseEventData;
 import com.x2a.input.MouseEventType;
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
 import com.x2a.scene.InputSprite;
+import com.x2a.spacegame.Player;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
@@ -24,23 +27,29 @@ public class PlayerWarp extends InputSprite{
 
     private boolean atTarget;
 
-    public PlayerWarp() {
+    private Player player;
+
+    public PlayerWarp(Player player) {
         super(new Vector2(), 50, 50, 0, 0, IMAGE_LOCATION, "SPR_PLAYER_WARP");
 
         target = new Vector2(Application.X_RES/2 - 55, Application.Y_RES/2 - 55);
         maxSpeed = INITIAL_MAX_SPEED;
+
+        this.player = player;
     }
 
     @Override
     public void onKeyEvent(KeyEventData data) {
-
+        if (data.getEventType() == KeyEventType.KEY_PRESSED && data.getKeyCode() == KeyEvent.VK_SPACE) {
+            stop();
+        }
     }
 
     @Override
     public void onMouseEvent(MouseEventData data) {
         if (data.getMouseButton() == MouseEvent.BUTTON3 && data.getEventType() == MouseEventType.MOUSE_PRESSED) {
             if (atTarget) {
-                target = new Vector2(data.getPosition());
+                target = new Vector2(data.getWorldPosition(player.getGame().getCurrentScene().getCamera()));
                 Vector2 targetDirection = new Vector2(target).sub(getPosition());
                 if (targetDirection.mag() != 0) {
                     targetDirection.unitVector();
@@ -53,6 +62,11 @@ public class PlayerWarp extends InputSprite{
             }
         }
     }
+
+    public void stop() {
+        target = new Vector2(getPosition());
+    }
+
 
     @Override
     public void update(float timeElapsed) {

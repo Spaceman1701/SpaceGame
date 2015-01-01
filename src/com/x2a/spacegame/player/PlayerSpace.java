@@ -74,6 +74,7 @@ public class PlayerSpace extends InputSprite {
         player.getGame().getCurrentScene().getCamera().setCameraPosition(getPosition());
     }
 
+
     @Override
     protected void onDeactivation() {
        super.onDeactivation();

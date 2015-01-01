@@ -2,6 +2,9 @@ package com.x2a.input;
 
 import com.x2a.Application;
 import com.x2a.math.Vector2;
+import com.x2a.scene.Camera;
+
+import java.awt.geom.AffineTransform;
 
 /**
  * Created by David on 12/28/2014.
@@ -63,5 +66,17 @@ public class MouseEventData {
 
     public boolean isAltDown() {
         return isAltDown;
+    }
+
+    public Vector2 getWorldPosition(Camera camera) {
+        System.out.println("Mouse Position is: " + getPosition());
+        System.out.println("Camera position is: " + camera.getPosition());
+
+        AffineTransform transform = new AffineTransform();
+        transform.translate(camera.getPosition().x, camera.getPosition().y);
+        transform.scale(camera.getScale(),camera.getScale());
+
+
+        return new Vector2(getPosition()).transform(transform);
     }
 }

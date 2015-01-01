@@ -32,7 +32,7 @@ public class Player extends Node{
     private Game game;
 
     public Player(Game game) {
-        playerWarp = new PlayerWarp();
+        playerWarp = new PlayerWarp(this);
         playerSpace = new PlayerSpace(this);
 
         state = PlayerState.WARP;

@@ -6,6 +6,7 @@ import com.x2a.input.MouseEventType;
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
 import com.x2a.render.Renderer;
+import com.x2a.scene.Camera;
 import com.x2a.scene.InputSprite;
 
 import java.awt.*;
@@ -22,12 +23,16 @@ public class MapPlanet extends InputSprite{
     private boolean infoWindowUp;
     private InfoWindow infoWindow;
 
-    public MapPlanet(Vector2 position, int id) {
+    private Camera camera;
+
+    public MapPlanet(Vector2 position, int id, Camera camera) {
         super(position, 20, 20, 0, 10, IMAGE_LOCATION, "planet_" + id);
 
         this.id = id;
 
         infoWindow = new InfoWindow("Location:" +'\n' + "Planet " + id, getPosition().add(new Vector2(50, 50)), 100, 50, Color.WHITE, Color.RED);
+
+        this.camera = camera;
     }
 
     @Override
@@ -38,7 +43,7 @@ public class MapPlanet extends InputSprite{
     @Override
     public void onMouseEvent(MouseEventData data) {
         if (data.getEventType() == MouseEventType.MOUSE_PRESSED && data.getMouseButton() == MouseEventData.BUTTON_1) {
-            if (GameMath.insideAABB(getPosition(), getWidth(), getHeight(), data.getPosition())) {
+            if (GameMath.insideAABB(getPosition(), getWidth(), getHeight(), data.getWorldPosition(camera))) {
                 if (!infoWindowUp) {
                     infoWindowUp = true;
                     getChildren().add(infoWindow);

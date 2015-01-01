@@ -1,5 +1,6 @@
 package com.x2a.math;
 
+import java.awt.geom.AffineTransform;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
@@ -83,5 +84,18 @@ public class Vector2 {
     @Override
     public String toString() {
         return "{Vector2, " + df.format(x) + ", " + df.format(y) + "}";
+    }
+
+    public Vector2 transform(AffineTransform transform) {
+        double[] values = new double[6];
+        transform.getMatrix(values);
+
+        float newX = (float) (x*values[0] + y*values[2] + values[4]);
+        float newY = (float) (x*values[1] + y*values[3] + values[5]);
+
+        x = newX;
+        y = newY;
+
+        return this;
     }
 }

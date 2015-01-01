@@ -1,10 +1,7 @@
 package com.x2a.spacegame;
 
 import com.x2a.Application;
-import com.x2a.input.KeyEventData;
-import com.x2a.input.KeyEventListener;
-import com.x2a.input.KeyEventType;
-import com.x2a.input.SafeInputUtil;
+import com.x2a.input.*;
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
 import com.x2a.spacegame.warp.InfoWindow;
@@ -13,6 +10,7 @@ import com.x2a.spacegame.warp.MapPlanet;
 import com.x2a.spacegame.warp.WarpBackground;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -24,6 +22,8 @@ public class WarpArea extends Area{
 
     private static final int NUMBER_PLANETS = 20;
     private static final float ARRIVAL_DISTANCE = 50;
+
+    private static final float ZOOM_SCALE_FACTOR = 0.1f;
 
     Player player;
 
@@ -53,6 +53,23 @@ public class WarpArea extends Area{
                 }
             }
         });
+
+        initZoom();
+    }
+
+    private void initZoom() {
+        SafeInputUtil.getInstance().registerMouseEventListener(new MouseEventListener() {
+            @Override
+            public void onMouseEvent(MouseEventData data) {
+                if (data.getEventType() == MouseEventType.MOUSE_WHEEL_MOVED) {
+                    getCamera().setScale(getCamera().getScale() + ZOOM_SCALE_FACTOR * data.getMouseWheelRotation());
+                } else if (data.getEventType() == MouseEventType.MOUSE_PRESSED) {
+                    if (data.getMouseButton() == MouseEvent.BUTTON2) {
+                        getCamera().setCameraPosition(data.getWorldPosition(getCamera()));
+                    }
+                }
+            }
+        });
     }
 
     public MapPlanet getCurrentPlanet() {
@@ -77,7 +94,7 @@ public class WarpArea extends Area{
 
         for (int i = 0; i< NUMBER_PLANETS; i++) {
             Vector2 pos = new Vector2(random.nextInt(768)-(768/2), random.nextInt(768)-(768/2));
-            MapPlanet p = new MapPlanet(pos, i);
+            MapPlanet p = new MapPlanet(pos, i, getCamera());
             getChildren().add(p);
             planetSet.add(p);
         }
