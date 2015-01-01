@@ -4,9 +4,11 @@ import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
 import com.x2a.render.Primitive;
 import com.x2a.render.Renderer;
+import com.x2a.render.shapes.Elipse;
 import com.x2a.render.shapes.Rectangle;
 import com.x2a.scene.Camera;
 import com.x2a.scene.Node;
+
 
 import java.awt.*;
 
@@ -24,6 +26,7 @@ public class Star extends Node implements Primitive{
     private float size;
 
     private final int maxBrightness;
+    private int brightness;
 
     public Star(Vector2 position, Camera camera) {
         this.position = new Vector2(position);
@@ -39,16 +42,21 @@ public class Star extends Node implements Primitive{
 
     @Override
     public void doDraw(Graphics2D g2) {
-        rectangle.doDraw(g2);
+        if (brightness > 10) {
+            rectangle.doDraw(g2);
+        }
     }
 
     @Override
     public void update(float timeElasped) {
-        int brightness = maxBrightness - (int)(camera.getScale()*50.0);
+        brightness = maxBrightness - (int)(camera.getScale()*50.0);
 
         brightness = GameMath.clamp(brightness, 255, 0);
 
-        rectangle.setColor(new Color(brightness, brightness, brightness));
+        Color test = new Color(255, 255, 255);
+
+
+        rectangle.setColor(new Color(255, 255, 255, brightness));
     }
 
     @Override

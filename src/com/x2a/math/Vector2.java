@@ -75,7 +75,7 @@ public class Vector2 {
     public boolean equals(Object o) {
         if (o instanceof Vector2) {
             Vector2 v = (Vector2) o;
-            return Math.abs(v.x - x) < EPSILON && Math.abs(v.y - y) < EPSILON;
+            return (Math.abs(v.x - x) < EPSILON && Math.abs(v.y - y) < EPSILON);
         } else {
             return false;
         }

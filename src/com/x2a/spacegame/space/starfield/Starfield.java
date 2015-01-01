@@ -1,10 +1,12 @@
 package com.x2a.spacegame.space.starfield;
 
+import com.x2a.math.AxisAlignedBox;
 import com.x2a.math.Vector2;
 import com.x2a.render.Renderer;
 import com.x2a.scene.Camera;
 import com.x2a.scene.Node;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,29 +15,47 @@ import java.util.Set;
  */
 public class Starfield extends Node{
 
-    private Set<Star> stars;
+    private static final int TILE_SIZE = 200;
+    private static final int TILE_STAR_NUMBER = 10;
 
+    private Camera camera;
+
+    private HashMap<Vector2, StarTile> tiles;
 
     public Starfield(Camera camera) {
-        stars = new HashSet<Star>();
+        tiles = new HashMap<Vector2, StarTile>();
+
+        this.camera = camera;
 
         regenField(camera);
     }
 
 
     public void regenField(Camera camera) {
-        stars.clear();
-        for (int i = 0; i<35000; i++) {
-            stars.add(new Star(new Vector2((float)(Math.random()-0.5)*70000.0f,(float)(Math.random()-0.5)*70000.0f), camera));
-        }
+        tiles.clear();
     }
 
     @Override
     public void update(float timeElapsed) {
-        super.update(timeElapsed);
-        for (Star s: stars) {
-            Renderer.getInstance().drawPrimitive(s);
-            s.update(timeElapsed);
+        AxisAlignedBox cameraView = camera.getView();
+
+        Vector2 tileAtBottomRight = new Vector2((float)Math.ceil(cameraView.getBottomRight().x/TILE_SIZE)*TILE_SIZE,
+                (float)Math.ceil(cameraView.getBottomRight().y/(float)TILE_SIZE)*TILE_SIZE);
+
+        for (Vector2 tileLoc = tileAtBottomRight; tileLoc.x > cameraView.getTopLeft().x-TILE_SIZE; tileLoc.sub(new Vector2(TILE_SIZE, 0))) {
+            for (Vector2 tileLoc2 = new Vector2(tileLoc); tileLoc2.y > cameraView.getTopLeft().y-TILE_SIZE; tileLoc2.sub(new Vector2(0, TILE_SIZE))) {
+                float xTransform = tileLoc2.x - (int)(TILE_SIZE/2.0f);
+                float yTransform = tileLoc2.y - (int)(TILE_SIZE/2.0f);
+
+                StarTile tile = tiles.get(tileLoc2);
+
+                if (tile == null) {
+                    tile = new StarTile(tileLoc2, TILE_STAR_NUMBER, TILE_SIZE, camera);
+                    tiles.put(tileLoc2, tile);
+                    System.out.println("New tile created at: " + tileLoc2);
+                }
+                tile.update(timeElapsed);
+            }
         }
     }
 
