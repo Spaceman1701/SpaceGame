@@ -36,6 +36,7 @@ public class WarpArea extends Area{
         player = game.getPlayer();
 
         getChildren().add(new Starfield(getCamera()));
+
         getChildren().add(player);
 
         player.setPosition(new Vector2(Application.X_RES/2, Application.Y_RES/2));

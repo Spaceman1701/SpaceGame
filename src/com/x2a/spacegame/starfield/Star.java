@@ -2,8 +2,9 @@ package com.x2a.spacegame.starfield;
 
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
-import com.x2a.render.Primitive;
-import com.x2a.render.shapes.Elipse;
+import com.x2a.render.*;
+import com.x2a.render.shapes.*;
+import com.x2a.render.shapes.Rectangle;
 import com.x2a.scene.Camera;
 import com.x2a.scene.Node;
 
@@ -17,7 +18,7 @@ public class Star extends Node implements Primitive{
 
 
     private Camera camera;
-    private Elipse rectangle;
+    private com.x2a.render.Shape rectangle;
 
     private Vector2 position;
 
@@ -31,7 +32,7 @@ public class Star extends Node implements Primitive{
 
         size = (float)Math.random()*15;
 
-        rectangle = new Elipse(position, size, size, 0, 999.0f, Color.WHITE, true);
+        rectangle = new Rectangle(position, size, size, 0, 999.0f, Color.WHITE, true);
 
         this.camera = camera;
 
