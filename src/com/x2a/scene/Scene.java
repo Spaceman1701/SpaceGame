@@ -13,6 +13,7 @@ public class Scene extends Node{
 
     public Scene() {
         camera = new Camera();
+        getChildren().add(camera);
     }
 
     public Camera getCamera() {

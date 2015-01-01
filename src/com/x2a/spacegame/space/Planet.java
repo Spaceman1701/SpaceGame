@@ -17,7 +17,7 @@ public class Planet extends Sprite {
     private int id;
 
     public Planet(int id) {
-        super(new Vector2(), 500, 500, 0, 20, IMAGE_LOCATION, "SPR_PLANET_SPACE");
+        super(new Vector2(), 900, 900, 0, 20, IMAGE_LOCATION, "SPR_PLANET_SPACE");
 
         this.id = id;
     }

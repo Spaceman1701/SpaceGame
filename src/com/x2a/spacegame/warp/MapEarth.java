@@ -14,7 +14,7 @@ public class MapEarth extends InputSprite {
     private static final String IMAGE_LOCATION = "res/images/sprites/MapEarth.png";
 
     public MapEarth() {
-        super(new Vector2(-5000, -5000), 20, 20, 0, 10, IMAGE_LOCATION, "MAP_EARTH");
+        super(new Vector2(-4500, -4500), 20, 20, 0, 10, IMAGE_LOCATION, "MAP_EARTH");
     }
 
     @Override

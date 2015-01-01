@@ -67,7 +67,7 @@ public class WarpArea extends Area{
                     getCamera().setScale(getCamera().getScale() + ZOOM_SCALE_FACTOR * data.getMouseWheelRotation());
                 } else if (data.getEventType() == MouseEventType.MOUSE_PRESSED) {
                     if (data.getMouseButton() == MouseEvent.BUTTON2) {
-                        getCamera().setCameraPosition(data.getWorldPosition(getCamera()));
+                        getCamera().moveToTarget(data.getWorldPosition(getCamera()), 5);
                     }
                 }
             }
@@ -100,8 +100,12 @@ public class WarpArea extends Area{
             getChildren().add(p);
             planetSet.add(p);
         }
+        MapEarth earth = new MapEarth();
+        getChildren().add(earth);
 
-        getChildren().add(new MapEarth());
+        getCamera().setCameraPosition(earth.getPosition());
+        getCamera().moveToTarget(player.getPosition().sub(new Vector2(800, 800)), 15);
+        getCamera().smoothZoom(8, 0.02f);
     }
 
 

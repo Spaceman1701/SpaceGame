@@ -2,15 +2,27 @@ package com.x2a.scene;
 
 import com.x2a.Application;
 import com.x2a.math.AxisAlignedBox;
+import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
 
 /**
  * Created by David on 12/28/2014.
  */
-public class Camera {
+public class Camera extends Node{
 
+    private static final float ARRIVAL_DISTANCE = 25.0f;
+    private static final float ZOOM_EPSILON = 0.1f;
     private Vector2 position;
     private float scale;
+
+    private boolean movingToTarget;
+    private Vector2 target;
+    private float moveSpeed;
+
+
+    private boolean smoothZooming;
+    private float zoomTarget;
+    private float zoomSpeed;
 
     public Camera() {
         position = new Vector2();
@@ -56,5 +68,35 @@ public class Camera {
         float height = Application.Y_RES/inverseScale;
 
         return new AxisAlignedBox(position, width, height);
+    }
+
+    public void moveToTarget(Vector2 target, float speed) {
+        this.target = target;
+        this.moveSpeed = speed;
+        movingToTarget = true;
+        System.out.println("Moving to target called");
+    }
+
+    @Override
+    public void update(float timeElapsed) {
+        if (movingToTarget && GameMath.getDistance(getPosition(), target) >= ARRIVAL_DISTANCE) {
+            Vector2 direction = new Vector2(target).sub(getPosition());
+            direction.unitVector();
+
+            moveCameraPosition(new Vector2(direction).mult(moveSpeed));
+        } else {
+            movingToTarget = false;
+        }
+        if (smoothZooming && Math.abs(zoomTarget - getScale()) >= ZOOM_EPSILON) {
+            setScale(getScale() + zoomSpeed);
+        } else {
+            smoothZooming = false;
+        }
+    }
+
+    public void smoothZoom(float target, float speed) {
+        this.zoomTarget = target;
+        this.zoomSpeed = speed;
+        this.smoothZooming = true;
     }
 }
