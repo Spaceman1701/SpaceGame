@@ -4,17 +4,20 @@ import com.x2a.Application;
 import com.x2a.input.*;
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
+import com.x2a.scene.Camera;
 import com.x2a.spacegame.starfield.Starfield;
 import com.x2a.spacegame.warp.InfoWindow;
 import com.x2a.spacegame.warp.MapEarth;
 import com.x2a.spacegame.warp.MapPlanet;
 import com.x2a.spacegame.warp.WarpBackground;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Ethan on 12/29/2014.
@@ -26,12 +29,19 @@ public class WarpArea extends Area{
 
     private static final float ZOOM_SCALE_FACTOR = 0.1f;
 
-    Player player;
+    private static final float WAIT_TIME = 1000.0f;
 
-    Set<MapPlanet> planetSet;
+    private float remainingWait = WAIT_TIME;
+
+    private Player player;
+
+    private Set<MapPlanet> planetSet;
+    private boolean needToMove;
 
     public WarpArea(SpaceGame game) {
         super(game);
+
+        needToMove = true;
 
         player = game.getPlayer();
 
@@ -102,10 +112,19 @@ public class WarpArea extends Area{
         }
         MapEarth earth = new MapEarth();
         getChildren().add(earth);
-
+        getCamera().setScale(0.1f);
         getCamera().setCameraPosition(earth.getPosition());
-        getCamera().moveToTarget(player.getPosition().sub(new Vector2(800, 800)), 15);
-        getCamera().smoothZoom(8, 0.02f);
+    }
+
+    @Override
+    public void update(float timeElapsed) {
+        remainingWait -= timeElapsed;
+        if (remainingWait <= 0 && needToMove) {
+            System.out.println("Moving camera");
+            getCamera().moveToTarget(player.getPosition().sub(new Vector2(800, 800)), 15);
+            getCamera().smoothZoom(8, 0.02f);
+            needToMove = false;
+        }
     }
 
 

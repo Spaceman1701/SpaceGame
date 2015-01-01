@@ -74,7 +74,6 @@ public class Camera extends Node{
         this.target = target;
         this.moveSpeed = speed;
         movingToTarget = true;
-        System.out.println("Moving to target called");
     }
 
     @Override

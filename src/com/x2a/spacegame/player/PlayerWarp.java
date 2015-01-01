@@ -30,7 +30,7 @@ public class PlayerWarp extends InputSprite{
     private Player player;
 
     public PlayerWarp(Player player) {
-        super(new Vector2(), 50, 50, 0, 0, IMAGE_LOCATION, "SPR_PLAYER_WARP");
+        super(new Vector2(), 30, 30, 0, 0, IMAGE_LOCATION, "SPR_PLAYER_WARP");
 
         target = new Vector2(Application.X_RES/2 - 55, Application.Y_RES/2 - 55);
         maxSpeed = INITIAL_MAX_SPEED;

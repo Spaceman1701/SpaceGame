@@ -26,7 +26,7 @@ public class MapPlanet extends InputSprite{
     private Camera camera;
 
     public MapPlanet(Vector2 position, int id, Camera camera) {
-        super(position, 20, 20, 0, 10, IMAGE_LOCATION, "planet_" + id);
+        super(position, 1, 10, 0, 10, IMAGE_LOCATION, "planet_" + id);
 
         this.id = id;
 
