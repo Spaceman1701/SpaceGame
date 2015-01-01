@@ -1,5 +1,7 @@
 package com.x2a.scene;
 
+import com.x2a.Application;
+import com.x2a.math.AxisAlignedBox;
 import com.x2a.math.Vector2;
 
 /**
@@ -46,5 +48,13 @@ public class Camera {
             return;
         }
         this.scale = scale;
+    }
+
+    public AxisAlignedBox getView() {
+        float inverseScale = 1.0f/scale;
+        float width = Application.X_RES/inverseScale;
+        float height = Application.Y_RES/inverseScale;
+
+        return new AxisAlignedBox(position, width, height);
     }
 }

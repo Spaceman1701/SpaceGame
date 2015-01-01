@@ -7,6 +7,7 @@ import com.x2a.input.SafeInputUtil;
 import com.x2a.math.Vector2;
 import com.x2a.spacegame.space.Planet;
 import com.x2a.spacegame.space.SpaceBackground;
+import com.x2a.spacegame.space.TileSpaceBackground;
 import com.x2a.spacegame.warp.MapPlanet;
 
 /**
@@ -25,7 +26,7 @@ public class SpaceArea extends Area{
 
         player = game.getPlayer();
         getChildren().add(game.getPlayer());
-        getChildren().add(new SpaceBackground());
+        getChildren().add(new TileSpaceBackground(getCamera()));
 
         planet = new Planet(0);
 
@@ -37,7 +38,7 @@ public class SpaceArea extends Area{
             @Override
             public void onMouseEvent(MouseEventData data) {
                 if (data.getEventType() == MouseEventType.MOUSE_WHEEL_MOVED) {
-                    getCamera().setScale(getCamera().getScale() + scaleFactor*data.getMouseWheelRotation());
+                    getCamera().setScale(getCamera().getScale() + scaleFactor * data.getMouseWheelRotation());
                 }
             }
         });
