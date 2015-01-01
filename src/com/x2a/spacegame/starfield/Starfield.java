@@ -1,14 +1,11 @@
-package com.x2a.spacegame.space.starfield;
+package com.x2a.spacegame.starfield;
 
 import com.x2a.math.AxisAlignedBox;
 import com.x2a.math.Vector2;
-import com.x2a.render.Renderer;
 import com.x2a.scene.Camera;
 import com.x2a.scene.Node;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Ethan on 12/31/2014.

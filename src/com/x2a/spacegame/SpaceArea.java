@@ -6,8 +6,7 @@ import com.x2a.input.MouseEventType;
 import com.x2a.input.SafeInputUtil;
 import com.x2a.math.Vector2;
 import com.x2a.spacegame.space.Planet;
-import com.x2a.spacegame.space.TileSpaceBackground;
-import com.x2a.spacegame.space.starfield.Starfield;
+import com.x2a.spacegame.starfield.Starfield;
 import com.x2a.spacegame.warp.MapPlanet;
 
 /**

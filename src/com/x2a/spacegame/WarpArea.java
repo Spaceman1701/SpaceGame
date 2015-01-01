@@ -4,6 +4,7 @@ import com.x2a.Application;
 import com.x2a.input.*;
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
+import com.x2a.spacegame.starfield.Starfield;
 import com.x2a.spacegame.warp.InfoWindow;
 import com.x2a.spacegame.warp.MapEarth;
 import com.x2a.spacegame.warp.MapPlanet;
@@ -34,7 +35,7 @@ public class WarpArea extends Area{
 
         player = game.getPlayer();
 
-        getChildren().add(new WarpBackground());
+        getChildren().add(new Starfield(getCamera()));
         getChildren().add(player);
 
         player.setPosition(new Vector2(Application.X_RES/2, Application.Y_RES/2));

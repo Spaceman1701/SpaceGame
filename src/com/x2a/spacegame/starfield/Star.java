@@ -1,11 +1,9 @@
-package com.x2a.spacegame.space.starfield;
+package com.x2a.spacegame.starfield;
 
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
 import com.x2a.render.Primitive;
-import com.x2a.render.Renderer;
 import com.x2a.render.shapes.Elipse;
-import com.x2a.render.shapes.Rectangle;
 import com.x2a.scene.Camera;
 import com.x2a.scene.Node;
 
