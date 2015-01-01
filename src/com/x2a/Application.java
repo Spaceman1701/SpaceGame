@@ -16,8 +16,8 @@ public class Application {
     private static final double ONE_MILLISECOND_NANOSECONDS = 1000000.0;
     private static final double ONE_SECOND = 1000;
 
-    public static final int X_RES = 768;
-    public static final int Y_RES = 768;
+    public static final int X_RES = 1920;
+    public static final int Y_RES = 1080;
 
     private static final int REFRESH_RATE = 60;
 
@@ -27,7 +27,7 @@ public class Application {
     }
 
     public void run() {
-        Window window = new Window(X_RES, Y_RES);
+        Window window = new Window(X_RES, Y_RES, true);
         double frameTime = ONE_SECOND/(double)REFRESH_RATE;
 
         Game game = new SpaceGame();

@@ -45,8 +45,8 @@ public class DrawPanel extends JPanel{
 
 
         if (currentCamera != null) {
-            g2.translate(-currentCamera.getPosition().x, -currentCamera.getPosition().y);
             g2.scale(1.0 / (double) currentCamera.getScale(), 1.0 / (double) currentCamera.getScale());
+            g2.translate(-currentCamera.getPosition().x, -currentCamera.getPosition().y);
         } else {
             System.err.println("Camera is null. Probably hasn't been initialized yet. This is expected to occur twice. If it occurs every frame there is a problem. This message is from DrawPanel.paintComponent.");
         }

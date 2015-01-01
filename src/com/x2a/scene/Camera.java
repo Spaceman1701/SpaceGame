@@ -42,6 +42,9 @@ public class Camera {
     }
 
     public void setScale(float scale) {
+        if (scale <= 0) {
+            return;
+        }
         this.scale = scale;
     }
 }

@@ -129,6 +129,12 @@ public class SafeInputUtil implements MouseListener, MouseMotionListener, MouseW
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        handleMouseEvent(MouseEventType.MOUSE_WHEEL_MOVED, e);
+        MouseEventData data = new MouseEventData(MouseEventType.MOUSE_WHEEL_MOVED, e.getX(), e.getY(),
+                e.getXOnScreen(), e.getYOnScreen(), e.getButton(), e.getWheelRotation(),
+                e.isShiftDown(), e.isControlDown(), e.isAltDown());
+
+        for (int i = 0; i<mouseEventListeners.size(); i++) {
+            mouseEventListeners.get(i).onMouseEvent(data);
+        }
     }
 }
