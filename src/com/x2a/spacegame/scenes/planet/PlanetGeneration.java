@@ -56,6 +56,7 @@ public class PlanetGeneration {
         return (0xff << 24) | ((rgb[0] & 0xff) << 16) | ((rgb[1] & 0xff) << 8) | (rgb[2] & 0xff);
     }
 
+
     private static byte rangeColor(int value) {
         if (value < 0) {
             return 0;
