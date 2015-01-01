@@ -50,7 +50,7 @@ public class TileBackground extends Node implements Primitive{
 
     @Override
     public float getDepth() {
-        return 1000.0f;
+        return Float.MAX_VALUE;
     }
 
     public Camera getCamera() {

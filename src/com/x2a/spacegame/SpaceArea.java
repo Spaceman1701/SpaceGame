@@ -7,6 +7,7 @@ import com.x2a.input.SafeInputUtil;
 import com.x2a.math.Vector2;
 import com.x2a.spacegame.space.Planet;
 import com.x2a.spacegame.space.TileSpaceBackground;
+import com.x2a.spacegame.space.starfield.Starfield;
 import com.x2a.spacegame.warp.MapPlanet;
 
 /**
@@ -20,12 +21,16 @@ public class SpaceArea extends Area{
 
     private Planet planet;
 
+    private Starfield starfield;
+
     public SpaceArea(SpaceGame game) {
         super(game);
 
         player = game.getPlayer();
         getChildren().add(game.getPlayer());
-        getChildren().add(new TileSpaceBackground(getCamera()));
+        //getChildren().add(new TileSpaceBackground(getCamera()));
+        starfield = new Starfield(getCamera());
+        getChildren().add(starfield);
 
         planet = new Planet(0);
 
@@ -47,6 +52,7 @@ public class SpaceArea extends Area{
     @Override
     public void onActivation() {
         super.onActivation();
+        starfield.regenField(getCamera());
         player.setState(Player.PlayerState.SPACE);
     }
 

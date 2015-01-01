@@ -22,4 +22,14 @@ public class GameMath {
         return aabb.pointInside(point);
     }
 
+    public static int clamp(int a, int max, int min) {
+        if (a > max) {
+            return max;
+        }
+        if (a < min) {
+            return min;
+        }
+        return a;
+    }
+
 }
