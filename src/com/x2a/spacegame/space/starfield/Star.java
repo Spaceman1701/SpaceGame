@@ -19,7 +19,7 @@ public class Star extends Node implements Primitive{
 
 
     private Camera camera;
-    private Rectangle rectangle;
+    private Elipse rectangle;
 
     private Vector2 position;
 
@@ -31,9 +31,9 @@ public class Star extends Node implements Primitive{
     public Star(Vector2 position, Camera camera) {
         this.position = new Vector2(position);
 
-        size = (float)Math.random()*30;
+        size = (float)Math.random()*15;
 
-        rectangle = new Rectangle(position, size, size, 0, 999.0f, Color.WHITE, true);
+        rectangle = new Elipse(position, size, size, 0, 999.0f, Color.WHITE, true);
 
         this.camera = camera;
 
@@ -42,7 +42,7 @@ public class Star extends Node implements Primitive{
 
     @Override
     public void doDraw(Graphics2D g2) {
-        if (brightness > 10) {
+        if (brightness > 20) {
             rectangle.doDraw(g2);
         }
     }

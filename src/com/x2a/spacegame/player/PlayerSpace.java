@@ -25,7 +25,7 @@ public class PlayerSpace extends InputSprite {
     private static final char LEFT = 'a';
     private static final char RIGHT = 'd';
 
-    private float maxSpeed = 3;
+    private float maxSpeed = 4;
 
     private float speed = 0;
 

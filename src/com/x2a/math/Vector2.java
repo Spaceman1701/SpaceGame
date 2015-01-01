@@ -83,10 +83,7 @@ public class Vector2 {
 
     @Override
     public int hashCode() {
-        int hash = 1;
-        hash = hash * 59 + Float.floatToIntBits(x);
-        hash = hash * 19 + Float.floatToIntBits(y);
-        return hash;
+        return toString().hashCode();
     }
 
     @Override

@@ -15,15 +15,15 @@ import java.util.Set;
  */
 public class Starfield extends Node{
 
-    private static final int TILE_SIZE = 200;
+    private static final int TILE_SIZE = 300;
     private static final int TILE_STAR_NUMBER = 10;
 
     private Camera camera;
 
-    private HashMap<Vector2, StarTile> tiles;
+    private HashMap<String, StarTile> tiles;
 
     public Starfield(Camera camera) {
-        tiles = new HashMap<Vector2, StarTile>();
+        tiles = new HashMap<String, StarTile>();
 
         this.camera = camera;
 
@@ -47,12 +47,12 @@ public class Starfield extends Node{
                 float xTransform = tileLoc2.x - (int)(TILE_SIZE/2.0f);
                 float yTransform = tileLoc2.y - (int)(TILE_SIZE/2.0f);
 
-                StarTile tile = tiles.get(tileLoc2);
+                StarTile tile = tiles.get(tileLoc2.toString());
 
                 if (tile == null) {
                     tile = new StarTile(tileLoc2, TILE_STAR_NUMBER, TILE_SIZE, camera);
-                    tiles.put(tileLoc2, tile);
-                    System.out.println("New tile created at: " + tileLoc2);
+                    tiles.put(tileLoc2.toString(), tile);
+                    //System.out.println("New tile created at: " + tileLoc2 + " HASHCODE = " + tileLoc2.hashCode());
                 }
                 tile.update(timeElapsed);
             }
