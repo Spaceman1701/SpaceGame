@@ -5,11 +5,12 @@ import com.x2a.input.*;
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
 import com.x2a.scene.Camera;
-import com.x2a.spacegame.starfield.Starfield;
+import com.x2a.spacegame.starfield.StarChunkFactory;
 import com.x2a.spacegame.warp.InfoWindow;
 import com.x2a.spacegame.warp.MapEarth;
 import com.x2a.spacegame.warp.MapPlanet;
 import com.x2a.spacegame.warp.WarpBackground;
+import com.x2a.spacegame.world.ChunkWorld;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,14 +30,14 @@ public class WarpArea extends Area{
 
     private static final float ZOOM_SCALE_FACTOR = 0.1f;
 
-    private static final float WAIT_TIME = 1000.0f;
+    private static final float WAIT_TIME = 1000f;
 
     private float remainingWait = WAIT_TIME;
 
     private Player player;
 
     private Set<MapPlanet> planetSet;
-    private boolean needToMove;
+    private boolean needToMove = true;
 
     public WarpArea(SpaceGame game) {
         super(game);
@@ -45,7 +46,8 @@ public class WarpArea extends Area{
 
         player = game.getPlayer();
 
-        getChildren().add(new Starfield(getCamera()));
+       // getChildren().add(new Starfield(getCamera()));
+        getChildren().add(new ChunkWorld(new StarChunkFactory(600, 2, camera), camera));
 
         getChildren().add(player);
 
@@ -63,6 +65,7 @@ public class WarpArea extends Area{
                         spaceArea.transitionTo(getCurrentPlanet());
                     }
                 }
+
             }
         });
 
@@ -114,15 +117,19 @@ public class WarpArea extends Area{
         getChildren().add(earth);
         getCamera().setScale(0.1f);
         getCamera().setCameraPosition(earth.getPosition());
+
     }
 
     @Override
     public void update(float timeElapsed) {
+        super.update(timeElapsed);
         remainingWait -= timeElapsed;
+        System.out.println(remainingWait);
         if (remainingWait <= 0 && needToMove) {
             System.out.println("Moving camera");
             getCamera().moveToTarget(player.getPosition().sub(new Vector2(800, 800)), 15);
             getCamera().smoothZoom(8, 0.02f);
+            System.out.println("Move calls are made");
             needToMove = false;
         }
     }
