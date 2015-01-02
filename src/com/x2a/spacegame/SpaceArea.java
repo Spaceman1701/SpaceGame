@@ -6,6 +6,7 @@ import com.x2a.input.MouseEventType;
 import com.x2a.input.SafeInputUtil;
 import com.x2a.math.Vector2;
 import com.x2a.spacegame.space.Planet;
+import com.x2a.spacegame.starfield.StarChunk;
 import com.x2a.spacegame.starfield.StarChunkFactory;
 import com.x2a.spacegame.warp.MapPlanet;
 import com.x2a.spacegame.world.ChunkWorld;
@@ -29,7 +30,7 @@ public class SpaceArea extends Area{
         player = game.getPlayer();
         getChildren().add(game.getPlayer());
         //getChildren().add(new TileSpaceBackground(getCamera()));
-        starfield = new ChunkWorld(new StarChunkFactory(600, 3, camera), camera);
+        starfield = new ChunkWorld<StarChunk>(new StarChunkFactory(600, 3, camera), camera);
         getChildren().add(starfield);
 
         planet = new Planet(0);

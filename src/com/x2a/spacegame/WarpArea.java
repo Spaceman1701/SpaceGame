@@ -5,6 +5,7 @@ import com.x2a.input.*;
 import com.x2a.math.GameMath;
 import com.x2a.math.Vector2;
 import com.x2a.scene.Camera;
+import com.x2a.spacegame.starfield.StarChunk;
 import com.x2a.spacegame.starfield.StarChunkFactory;
 import com.x2a.spacegame.warp.InfoWindow;
 import com.x2a.spacegame.warp.MapEarth;
@@ -47,7 +48,7 @@ public class WarpArea extends Area{
         player = game.getPlayer();
 
        // getChildren().add(new Starfield(getCamera()));
-        getChildren().add(new ChunkWorld(new StarChunkFactory(600, 2, camera), camera));
+        getChildren().add(new ChunkWorld<StarChunk>(new StarChunkFactory(600, 2, camera), camera));
 
         getChildren().add(player);
 

@@ -5,24 +5,25 @@ import com.x2a.math.Vector2;
 import com.x2a.scene.Camera;
 import com.x2a.scene.Node;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Ethan on 1/1/2015.
  */
-public class ChunkWorld extends Node{
+public class ChunkWorld<E extends Chunk> extends Node{
     private ChunkFactory chunkFactory;
 
     private Camera camera;
 
-    private Map<String, Chunk> chunks;
+    private Map<String, E> chunks;
 
-    public ChunkWorld(ChunkFactory chunkFactory, Camera camera) {
+    public ChunkWorld(ChunkFactory<E> chunkFactory, Camera camera) {
         this.chunkFactory = chunkFactory;
         this.camera = camera;
 
-        chunks = new HashMap<String, Chunk>();
+        chunks = new HashMap<String, E>();
     }
 
 
@@ -43,15 +44,19 @@ public class ChunkWorld extends Node{
                 float xTransform = tileLoc2.x - (int)(chunkFactory.getChunkWidth()/2.0f);
                 float yTransform = tileLoc2.y - (int)(chunkFactory.getChunkHeight()/2.0f);
 
-                Chunk chunk = chunks.get(tileLoc2.toString());
+                E chunk = chunks.get(tileLoc2.toString());
 
                 if (chunk == null) {
-                    chunk = chunkFactory.newChunk(tileLoc2);
+                    chunk = (E)chunkFactory.newChunk(tileLoc2);
                     chunks.put(tileLoc2.toString(), chunk);
                 }
                 chunk.update(timeElapsed);
             }
         }
+    }
+
+    public Collection<E> getChunks() {
+        return chunks.values();
     }
 
 }
