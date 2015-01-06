@@ -14,7 +14,9 @@ public class PlanetGen {
 
     private int size;
     private int max;
+
     private float[] map;
+    private Color[] colorMap;
 
     private Random random;
 
@@ -27,6 +29,7 @@ public class PlanetGen {
         size = (int)Math.pow(2, DETAIL) + 1;
         max = size - 1;
         map = new float[size*size];
+        colorMap = new Color[size*size];
 
         random = new Random();
 
@@ -36,6 +39,8 @@ public class PlanetGen {
 
         maxHeight = findMax();
         minHeight = findMin();
+
+        fillColorMap();
     }
 
     private float findMax() {
@@ -107,15 +112,23 @@ public class PlanetGen {
         return image;
     }
 
+    private void fillColorMap() {
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                int heightColor = heightToColor(getValue(x, y));
+                Color color = getColorFromHeight(heightColor);
+                colorMap[x + size*y] = color;
+            }
+        }
+    }
+
     public BufferedImage getColorMap() {
         Color averageColor = new Color(128, 128, 128);
         BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
 
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
-                int heightColor = heightToColor(getValue(x, y));
-                Color color = getColorFromHeight(heightColor);
-                image.setRGB(x, y, color.getRGB());
+                image.setRGB(x, y, colorMap[x + size*y].getRGB());
             }
         }
 
