@@ -1,8 +1,7 @@
 package com.x2a.spacegame;
 
 import com.x2a.math.Vector2;
-import com.x2a.spacegame.scenes.planet.PlanetGen;
-import com.x2a.spacegame.scenes.planet.PlanetGeneration;
+import com.x2a.spacegame.scenes.planet.generation.PlanetGen;
 
 /**
  * Created by Ethan on 12/29/2014.

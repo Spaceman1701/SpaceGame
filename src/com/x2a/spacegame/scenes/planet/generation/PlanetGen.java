@@ -1,4 +1,4 @@
-package com.x2a.spacegame.scenes.planet;
+package com.x2a.spacegame.scenes.planet.generation;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

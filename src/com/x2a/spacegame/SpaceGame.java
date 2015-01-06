@@ -2,8 +2,6 @@ package com.x2a.spacegame;
 
 import com.x2a.game.Game;
 import com.x2a.input.*;
-import com.x2a.math.Vector2;
-import com.x2a.scene.Node;
 import com.x2a.spacegame.scenes.planet.PlanetGeneration;
 
 /**
