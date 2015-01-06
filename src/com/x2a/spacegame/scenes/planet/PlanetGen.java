@@ -17,6 +17,7 @@ public class PlanetGen {
 
     private float[] map;
     private Color[] colorMap;
+    private long seed;
 
     private Random random;
 
@@ -25,13 +26,14 @@ public class PlanetGen {
 
     private int iter;
 
-    public PlanetGen() {
+    public PlanetGen(long seed) {
+        this.seed = seed;
         size = (int)Math.pow(2, DETAIL) + 1;
         max = size - 1;
         map = new float[size*size];
         colorMap = new Color[size*size];
 
-        random = new Random();
+        random = new Random(seed);
 
         initCorners();
         iter = 0;
@@ -128,7 +130,7 @@ public class PlanetGen {
 
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
-                image.setRGB(x, y, colorMap[x + size*y].getRGB());
+                image.setRGB(x, y, colorMap[x + size * y].getRGB());
             }
         }
 

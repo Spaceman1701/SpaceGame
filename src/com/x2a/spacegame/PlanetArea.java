@@ -11,7 +11,7 @@ public class PlanetArea extends Area {
 
     public PlanetArea(SpaceGame game) {
         super(game);
-        PlanetGen planetGen = new PlanetGen();
+        PlanetGen planetGen = new PlanetGen(System.currentTimeMillis());
 
         getChildren().add(new TestSprite(new Vector2(0, 0), "stuff", 1.0f, planetGen.getColorMap()));
     }
