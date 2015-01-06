@@ -13,6 +13,6 @@ public class PlanetArea extends Area {
         super(game);
         PlanetGen planetGen = new PlanetGen();
 
-        getChildren().add(new TestSprite(new Vector2(0, 0), "stuff", 1.0f, planetGen.getHeightMap()));
+        getChildren().add(new TestSprite(new Vector2(0, 0), "stuff", 1.0f, planetGen.getColorMap()));
     }
 }

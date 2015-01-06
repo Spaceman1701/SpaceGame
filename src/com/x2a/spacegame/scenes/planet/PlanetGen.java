@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class PlanetGen {
 
-    private static int DETAIL = 7;
+    private static int DETAIL = 8;
     private static float ROUGHNESS = 0.5f;
 
     private int size;
@@ -101,7 +101,6 @@ public class PlanetGen {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
                 int heightColor = heightToColor(getValue(x, y));
-                System.out.println(heightColor);
                 Color color = new Color(heightColor, heightColor, heightColor);
                 image.setRGB(x, y, color.getRGB());
             }
@@ -109,6 +108,40 @@ public class PlanetGen {
 
         return image;
     }
+
+    public BufferedImage getColorMap() {
+        Color averageColor = new Color(128, 128, 128);
+        BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                int heightColor = heightToColor(getValue(x, y));
+                Color color = getColorFromHeight(heightColor);
+                image.setRGB(x, y, color.getRGB());
+            }
+        }
+
+        return image;
+    }
+
+    private Color getColorFromHeight(int normalizedHeight) {
+        Color ground = new Color(130, 105, 83);
+        Color grass = new Color(119, 190, 119);
+        Color sand = new Color(253, 253, 150);
+        Color pastelWater = new Color(119, 158, 203);
+
+        if (normalizedHeight >= 0 && normalizedHeight < 128) {
+            return pastelWater;
+        } else if (normalizedHeight >= 128 && normalizedHeight < 160) {
+            return sand;
+        } else if (normalizedHeight >= 160 && normalizedHeight < 210) {
+            return grass;
+        } else if (normalizedHeight >= 210 && normalizedHeight < 256) {
+            return ground;
+        }
+        return ground;
+    }
+
 
     private int heightToColor(float height) {
         float heightRange = (maxHeight - minHeight);

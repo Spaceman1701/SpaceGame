@@ -18,7 +18,7 @@ public class TestSprite extends InputSprite {
     }
 
     public TestSprite(Vector2 position, String name, float depth, BufferedImage image) {
-        super(position, 600, 600, 0, depth, image, name);
+        super(position, 700, 700, 0, depth, image, name);
     }
 
     @Override
