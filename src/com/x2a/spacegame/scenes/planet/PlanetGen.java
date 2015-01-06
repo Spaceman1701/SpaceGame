@@ -10,7 +10,7 @@ import java.util.Random;
 public class PlanetGen {
 
     private static int DETAIL = 8;
-    private static float ROUGHNESS = 0.5f;
+    private static float ROUGHNESS = 0.8f;
 
     private int size;
     private int max;
@@ -80,7 +80,6 @@ public class PlanetGen {
 
         for (y = half; y < max; y += size) {
             for (x = half; x < max; x += size) {
-                //System.out.println("Square: " + x + ", " + y);
                 square(x, y, half, random.nextFloat() * scale * 2 - scale);
             }
         }
@@ -95,7 +94,6 @@ public class PlanetGen {
     }
 
     public BufferedImage getHeightMap() {
-        Color averageColor = new Color(128, 128, 128);
         BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
 
         for (int x = 0; x < size; x++) {
