@@ -118,7 +118,7 @@ public class HeightMap {
         map[x + size*y] = value;
     }
 
-    private float getValue(int x, int y) {
+    public float getValue(int x, int y) {
         if (x < 0) {
             x = 0;
         } else if (x >= size) {

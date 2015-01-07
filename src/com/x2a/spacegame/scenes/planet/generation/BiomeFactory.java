@@ -34,4 +34,9 @@ public class BiomeFactory {
 
         return null;
     }
+
+    public static void main(String[] args) {
+        BiomeFactory factory = new BiomeFactory(System.nanoTime());
+        factory.getRandomBiome(0, 0, 0);
+    }
 }

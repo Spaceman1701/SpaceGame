@@ -1,6 +1,7 @@
 package com.x2a.spacegame;
 
 import com.x2a.math.Vector2;
+import com.x2a.spacegame.scenes.planet.PlanetData;
 import com.x2a.spacegame.scenes.planet.generation.PlanetGen;
 
 /**
@@ -10,8 +11,10 @@ public class PlanetArea extends Area {
 
     public PlanetArea(SpaceGame game) {
         super(game);
-        PlanetGen planetGen = new PlanetGen(System.currentTimeMillis());
+        //PlanetGen planetGen = new PlanetGen(System.currentTimeMillis());
 
-        getChildren().add(new TestSprite(new Vector2(0, 0), "stuff", 1.0f, planetGen.getColorMap()));
+        PlanetData planetData = PlanetData.generatePlanetData();
+
+        getChildren().add(new TestSprite(new Vector2(0, 0), "stuff", 1.0f, planetData.getColorImage()));
     }
 }

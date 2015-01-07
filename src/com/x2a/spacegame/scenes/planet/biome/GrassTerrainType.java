@@ -30,7 +30,7 @@ public enum GrassTerrainType implements TerrainType {
 
     @Override
     public Color getColor() {
-        return null;
+        return color;
     }
 
     @Override

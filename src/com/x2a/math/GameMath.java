@@ -32,4 +32,13 @@ public class GameMath {
         return a;
     }
 
+    public static boolean betweenTwoValues(float value, float lower, float upper) {
+        return (value < upper) && (value >= lower);
+    }
+
+    public static float convertToUnitRange(float value, float min, float max) {
+        float newValue = (value - min) / (max - min);
+        return newValue;
+    }
+
 }
