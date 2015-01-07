@@ -2,7 +2,6 @@ package com.x2a.spacegame;
 
 import com.x2a.game.Game;
 import com.x2a.input.*;
-import com.x2a.spacegame.scenes.planet.PlanetGeneration;
 
 /**
  * Created by Ethan on 12/28/2014.

@@ -1,22 +1,19 @@
 package com.x2a.spacegame.scenes.planet.generation;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- * Created by Ethan on 1/5/2015.
+ * Created by Ethan on 1/6/2015.
  */
-public class PlanetGen {
-
-    private static int DETAIL = 10;
-    private static float ROUGHNESS = 0.8f;
+public class HeightMap {
+    private float roughness;
 
     private int size;
     private int max;
 
     private float[] map;
-    private Color[] colorMap;
+
     private long seed;
 
     private Random random;
@@ -24,25 +21,33 @@ public class PlanetGen {
     private float maxHeight;
     private float minHeight;
 
-    private int iter;
-
-    public PlanetGen(long seed) {
+    /**
+     *
+     * @param seed
+     * @param size must be power of two + 1. Examples: 5, 65, 129, 257, 1025
+     * @param roughness value between 0 and 1. Higher values will result in greater height offsets. Lower values = flatter.
+     */
+    public HeightMap(long seed, int size, float roughness) {
+        if (((size - 1) & (size - 2)) != 0) { //test for power of two
+            throw new IllegalArgumentException("size is not power of two + 1");
+        }
+        this.roughness = roughness;
         this.seed = seed;
-        size = (int)Math.pow(2, DETAIL) + 1;
+        this.size = size;
         max = size - 1;
         map = new float[size*size];
-        colorMap = new Color[size*size];
 
         random = new Random(seed);
 
-        initCorners();
-        iter = 0;
-        divide(max);
+        generate();
 
         maxHeight = findMax();
         minHeight = findMin();
+    }
 
-        fillColorMap();
+    private void generate() {
+        initCorners();
+        divide(max);
     }
 
     private float findMax() {
@@ -73,12 +78,11 @@ public class PlanetGen {
     }
 
     private void divide(int size) {
-        iter++;
         int x;
         int y;
         int half = size/2;
         float fHalf = (float)size/2.0f;
-        float scale = ROUGHNESS * size;
+        float scale = roughness * size;
 
         if (fHalf < 1) {
             return;
@@ -97,71 +101,6 @@ public class PlanetGen {
         }
 
         divide(size/2);
-    }
-
-    public BufferedImage getHeightMap() {
-        BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                int heightColor = heightToColor(getValue(x, y));
-                Color color = new Color(heightColor, heightColor, heightColor);
-                image.setRGB(x, y, color.getRGB());
-            }
-        }
-
-        return image;
-    }
-
-    private void fillColorMap() {
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                int heightColor = heightToColor(getValue(x, y));
-                Color color = getColorFromHeight(heightColor);
-                colorMap[x + size*y] = color;
-            }
-        }
-    }
-
-    public BufferedImage getColorMap() {
-        Color averageColor = new Color(128, 128, 128);
-        BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                image.setRGB(x, y, colorMap[x + size * y].getRGB());
-            }
-        }
-
-        return image;
-    }
-
-    private Color getColorFromHeight(int normalizedHeight) {
-        Color ground = new Color(130, 105, 83);
-        Color grass = new Color(119, 190, 119);
-        Color sand = new Color(253, 253, 150);
-        Color pastelWater = new Color(119, 158, 203);
-
-        if (normalizedHeight >= 0 && normalizedHeight < 128) {
-            return pastelWater;
-        } else if (normalizedHeight >= 128 && normalizedHeight < 160) {
-            return sand;
-        } else if (normalizedHeight >= 160 && normalizedHeight < 210) {
-            return grass;
-        } else if (normalizedHeight >= 210 && normalizedHeight < 256) {
-            return ground;
-        }
-        return ground;
-    }
-
-
-    private int heightToColor(float height) {
-        float heightRange = (maxHeight - minHeight);
-        float colorRange = 255;
-
-        float value = (((height - minHeight) * colorRange) / heightRange);
-
-        return (int)value;
     }
 
     private void square(int x, int y, int size, float offset) {
@@ -214,5 +153,9 @@ public class PlanetGen {
 
     public float getMaxHeight() {
         return maxHeight;
+    }
+
+    public float[] getMap() {
+        return map;
     }
 }
