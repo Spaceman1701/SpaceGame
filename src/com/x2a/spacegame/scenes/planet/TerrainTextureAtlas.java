@@ -16,14 +16,12 @@ import java.util.Map;
  */
 public class TerrainTextureAtlas {
 
-    private Map<String, WeakReference<BufferedImage>> images;
+    private static Map<String, WeakReference<BufferedImage>> images = Collections.synchronizedMap(new HashMap<String, WeakReference<BufferedImage>>());
 
 
-    public TerrainTextureAtlas() {
-        images = Collections.synchronizedMap(new HashMap<String, WeakReference<BufferedImage>>());
-    }
+    private TerrainTextureAtlas() {}
 
-    public BufferedImage getImage(String location) {
+    public static BufferedImage getImage(String location) {
         BufferedImage image = null;
         WeakReference<BufferedImage> ref = images.get(location);
         if (ref != null) {

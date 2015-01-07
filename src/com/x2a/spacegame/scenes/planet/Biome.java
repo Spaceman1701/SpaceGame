@@ -18,14 +18,6 @@ public abstract class Biome {
         this.averageHeight = averageHeight.floatValue();
     }
 
-    public BufferedImage getImage(float height) {
-        return getTerrainTypeFromHeight(height).getImage();
-    }
-
-    public Color getColor(float height) {
-        return getTerrainTypeFromHeight(height).getColor();
-    }
-
     public TerrainData getTerrainData(float height) {
         return getTerrainTypeFromHeight(height).getData();
     }

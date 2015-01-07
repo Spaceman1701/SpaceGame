@@ -15,9 +15,5 @@ public interface TerrainType {
     static final String OCEAN_TEXTURE_LOCATION = "";
     static final String ROCK_TEXTURE_LOCATION = "";
 
-    public BufferedImage getImage();
-
-    public Color getColor();
-
     public TerrainData getData();
 }

@@ -35,7 +35,7 @@ public class PlanetData {
         BufferedImage image = new BufferedImage(heightMap.getSize(), heightMap.getSize(), BufferedImage.TYPE_INT_ARGB);
         for (int x = 0; x < heightMap.getSize(); x++) {
             for (int y = 0; y <heightMap.getSize(); y++) {
-                Color color= biome.getTerrainTypeFromHeight(heightMap.getValue(x, y)).getColor();
+                Color color= biome.getTerrainData(heightMap.getValue(x, y)).getColor();
                 //System.out.println(color);
                 image.setRGB(x, y, color.getRGB());
             }
