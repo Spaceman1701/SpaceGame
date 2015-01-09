@@ -17,6 +17,10 @@ public class GameMath {
         return (float)Math.sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
     }
 
+    public static float getDistance2(Vector2 a, Vector2 b) {
+        return (a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y);
+    }
+
     public static boolean insideAABB(Vector2 center, float width, float height, Vector2 point) {
         AxisAlignedBox aabb = new AxisAlignedBox(center, width, height);
         return aabb.pointInside(point);
@@ -40,5 +44,4 @@ public class GameMath {
         float newValue = (value - min) / (max - min);
         return newValue;
     }
-
 }

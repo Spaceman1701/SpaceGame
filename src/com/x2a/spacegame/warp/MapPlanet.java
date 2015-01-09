@@ -8,6 +8,7 @@ import com.x2a.math.Vector2;
 import com.x2a.render.Renderer;
 import com.x2a.scene.Camera;
 import com.x2a.scene.InputSprite;
+import com.x2a.spacegame.scenes.planet.PlanetData;
 
 import java.awt.*;
 
@@ -25,10 +26,17 @@ public class MapPlanet extends InputSprite{
 
     private Camera camera;
 
+    private PlanetData data;
+
     public MapPlanet(Vector2 position, int id, Camera camera) {
         super(position, 10, 10, 0, 10, IMAGE_LOCATION, "planet_" + id);
 
         this.id = id;
+
+        data = PlanetData.generatePlanetData();
+        data.loadData(33);
+        setImage(data.getColorImage());
+        data.unloadData();
 
         infoWindow = new InfoWindow("Location:" +'\n' + "Planet " + id, getPosition().add(new Vector2(50, 50)), 100, 50, Color.WHITE, Color.RED);
 
@@ -62,5 +70,9 @@ public class MapPlanet extends InputSprite{
 
     public int getId() {
         return id;
+    }
+
+    public PlanetData getData() {
+        return data;
     }
 }

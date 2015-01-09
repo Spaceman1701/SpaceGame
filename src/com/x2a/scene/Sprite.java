@@ -128,6 +128,10 @@ public abstract class Sprite extends Node implements Primitive {
         return image;
     }
 
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
     public String getName() {
         return name;
     }

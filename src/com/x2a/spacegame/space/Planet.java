@@ -4,6 +4,7 @@ import com.x2a.math.Vector2;
 import com.x2a.render.Renderer;
 import com.x2a.render.Text;
 import com.x2a.scene.Sprite;
+import com.x2a.spacegame.scenes.planet.PlanetData;
 
 import java.awt.*;
 
@@ -14,12 +15,17 @@ public class Planet extends Sprite {
 
     private static final String IMAGE_LOCATION = "res/images/sprites/MapPlanet.png";
 
+    private PlanetData data;
     private int id;
 
-    public Planet(int id) {
+    public Planet(int id, PlanetData data) {
         super(new Vector2(), 900, 900, 0, 20, IMAGE_LOCATION, "SPR_PLANET_SPACE");
 
+        this.data = data;
         this.id = id;
+
+        data.loadData(257);
+        setImage(data.getColorImage());
     }
 
     @Override

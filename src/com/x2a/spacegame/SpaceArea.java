@@ -33,8 +33,6 @@ public class SpaceArea extends Area{
         starfield = new ChunkWorld<StarChunk>(new StarChunkFactory(600, 3, camera), camera);
         getChildren().add(starfield);
 
-        planet = new Planet(0);
-
         initZoom();
     }
 
@@ -60,6 +58,7 @@ public class SpaceArea extends Area{
     @Override
     public void onDeactivation() {
         getChildren().remove(planet);
+        planet = null;
         getGame().getCurrentScene().getCamera().setCameraPosition(new Vector2());
         getGame().getCurrentScene().getCamera().setScale(1.0f);
     }
@@ -68,7 +67,8 @@ public class SpaceArea extends Area{
         activate();
 
         if (location != null) {
-            planet.setId(location.getId());
+            planet = new Planet(location.getId(), location.getData());
+
             getChildren().add(planet);
         }
     }

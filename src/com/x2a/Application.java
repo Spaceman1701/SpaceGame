@@ -7,6 +7,7 @@ import com.x2a.spacegame.SpaceGame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 /**
  * Created by Ethan on 12/28/2014.
@@ -20,6 +21,8 @@ public class Application {
     public static final int Y_RES = 1080;
 
     private static final int REFRESH_RATE = 60;
+
+    public static final Random APP_RANDOM = new Random();
 
     public static void main(String[] args) {
         Application app = new Application();
