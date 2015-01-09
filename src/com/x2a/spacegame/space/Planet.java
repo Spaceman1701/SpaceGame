@@ -24,13 +24,17 @@ public class Planet extends Sprite {
         this.data = data;
         this.id = id;
 
-        data.loadData(257);
+        data.loadData(2049);
         setImage(data.getColorImage());
     }
 
     @Override
     public void update(float timeElapsed) {
         Renderer.getInstance().drawPrimitive(new Text("Planet: " + id, getPosition(), 50, 50, 0, Color.RED, 19));
+    }
+
+    public void unload() {
+        data.unloadData();
     }
 
     public int getId() {

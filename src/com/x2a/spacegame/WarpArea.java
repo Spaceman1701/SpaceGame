@@ -116,23 +116,12 @@ public class WarpArea extends Area{
         }
         MapEarth earth = new MapEarth();
         getChildren().add(earth);
-        getCamera().setScale(0.1f);
-        getCamera().setCameraPosition(earth.getPosition());
 
     }
 
     @Override
     public void update(float timeElapsed) {
         super.update(timeElapsed);
-        remainingWait -= timeElapsed;
-        System.out.println(remainingWait);
-        if (remainingWait <= 0 && needToMove) {
-            System.out.println("Moving camera");
-            getCamera().moveToTarget(player.getPosition().sub(new Vector2(800, 800)), 15);
-            getCamera().smoothZoom(8, 0.02f);
-            System.out.println("Move calls are made");
-            needToMove = false;
-        }
     }
 
 

@@ -57,8 +57,11 @@ public class SpaceArea extends Area{
 
     @Override
     public void onDeactivation() {
-        getChildren().remove(planet);
-        planet = null;
+        if (planet != null) {
+            getChildren().remove(planet);
+            planet.unload();
+            planet = null;
+        }
         getGame().getCurrentScene().getCamera().setCameraPosition(new Vector2());
         getGame().getCurrentScene().getCamera().setScale(1.0f);
     }
