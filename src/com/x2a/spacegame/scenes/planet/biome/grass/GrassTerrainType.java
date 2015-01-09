@@ -1,5 +1,6 @@
-package com.x2a.spacegame.scenes.planet.biome;
+package com.x2a.spacegame.scenes.planet.biome.grass;
 
+import com.x2a.spacegame.scenes.planet.biome.TerrainType;
 import com.x2a.spacegame.scenes.planet.terrain.TerrainData;
 
 import java.awt.*;

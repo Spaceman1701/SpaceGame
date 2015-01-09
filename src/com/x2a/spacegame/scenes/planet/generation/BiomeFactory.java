@@ -1,9 +1,9 @@
 package com.x2a.spacegame.scenes.planet.generation;
 
 import com.x2a.spacegame.scenes.planet.Biome;
-import com.x2a.spacegame.scenes.planet.biome.GrassBiome;
+import com.x2a.spacegame.scenes.planet.biome.grass.GrassBiome;
+import com.x2a.spacegame.scenes.planet.biome.rock.RockBiome;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 /**
@@ -14,7 +14,7 @@ public class BiomeFactory {
     private Random random;
     private long seed;
 
-    private Class[] biomeClasses = {GrassBiome.class};
+    private Class[] biomeClasses = {GrassBiome.class, RockBiome.class};
 
     public BiomeFactory(long seed) {
         this.seed = seed;
