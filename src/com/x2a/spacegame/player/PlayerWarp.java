@@ -48,17 +48,8 @@ public class PlayerWarp extends InputSprite{
     @Override
     public void onMouseEvent(MouseEventData data) {
         if (data.getMouseButton() == MouseEvent.BUTTON3 && data.getEventType() == MouseEventType.MOUSE_PRESSED) {
-            if (atTarget) {
+            if (true) {
                 target = new Vector2(data.getWorldPosition(player.getGame().getCurrentScene().getCamera()));
-                Vector2 targetDirection = new Vector2(target).sub(getPosition());
-                if (targetDirection.mag() != 0) {
-                    targetDirection.unitVector();
-                    System.out.println(targetDirection);
-
-                    float theta = GameMath.signedAngle(targetDirection, GameMath.polarToVector(1, getRotation())) - (float) Math.PI / 2.0f;
-                    System.out.println(Math.toDegrees(theta));
-                    setRotation(-theta);
-                }
             }
         }
     }
@@ -70,11 +61,16 @@ public class PlayerWarp extends InputSprite{
 
     @Override
     public void update(float timeElapsed) {
+        setRotation(0);
         Vector2 targetDirection = new Vector2(target).sub(getPosition());
         if (GameMath.getDistance(target, getPosition()) > 2f) {
             if (targetDirection.mag() != 0) {
                 targetDirection.unitVector();
                 setPosition(getPosition().add(new Vector2(targetDirection).mult(maxSpeed)));
+
+                float theta = GameMath.signedAngle(targetDirection, GameMath.polarToVector(1, getRotation())) - (float) Math.PI / 2.0f;
+                System.out.println(Math.toDegrees(theta));
+                setRotation(-theta);
                 atTarget = false;
             }
         } else {

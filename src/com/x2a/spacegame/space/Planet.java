@@ -15,6 +15,8 @@ public class Planet extends Sprite {
 
     private static final String IMAGE_LOCATION = "res/images/sprites/MapPlanet.png";
 
+    private static final int RESOLUTION = 513;
+
     private PlanetData data;
     private int id;
 
@@ -24,7 +26,7 @@ public class Planet extends Sprite {
         this.data = data;
         this.id = id;
 
-        data.loadData(2049);
+        data.loadData(RESOLUTION);
         setImage(data.getColorImage());
     }
 
