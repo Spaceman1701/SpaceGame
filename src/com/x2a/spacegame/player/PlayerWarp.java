@@ -48,9 +48,7 @@ public class PlayerWarp extends InputSprite{
     @Override
     public void onMouseEvent(MouseEventData data) {
         if (data.getMouseButton() == MouseEvent.BUTTON3 && data.getEventType() == MouseEventType.MOUSE_PRESSED) {
-            if (true) {
                 target = new Vector2(data.getWorldPosition(player.getGame().getCurrentScene().getCamera()));
-            }
         }
     }
 
