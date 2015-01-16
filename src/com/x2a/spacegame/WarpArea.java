@@ -11,6 +11,7 @@ import com.x2a.spacegame.warp.InfoWindow;
 import com.x2a.spacegame.warp.MapEarth;
 import com.x2a.spacegame.warp.MapPlanet;
 import com.x2a.spacegame.warp.WarpBackground;
+import com.x2a.spacegame.warp.sector.SectorMap;
 import com.x2a.spacegame.world.ChunkWorld;
 
 import javax.swing.*;
@@ -40,6 +41,8 @@ public class WarpArea extends Area{
     private Set<MapPlanet> planetSet;
     private boolean needToMove = true;
 
+    private SectorMap map;
+
     public WarpArea(SpaceGame game) {
         super(game);
 
@@ -48,13 +51,13 @@ public class WarpArea extends Area{
         player = game.getPlayer();
 
        // getChildren().add(new Starfield(getCamera()));
-        getChildren().add(new ChunkWorld<StarChunk>(new StarChunkFactory(600, 2, camera), camera));
+        //getChildren().add(new ChunkWorld<StarChunk>(new StarChunkFactory(600, 2, camera), camera));
 
         getChildren().add(player);
 
         player.setPosition(new Vector2(Application.X_RES/2, Application.Y_RES/2));
 
-        createMap();
+        initSectorMap();
 
         SafeInputUtil.getInstance().registerKeyEventListener(new KeyEventListener() {
             @Override
@@ -73,12 +76,19 @@ public class WarpArea extends Area{
         initZoom();
     }
 
+    private void initSectorMap() {
+        map = new SectorMap(Application.APP_RANDOM.nextLong(), getGame());
+        getChildren().add(map);
+        map.setCurrentSectorLocation(new Vector2());
+
+    }
+
     private void initZoom() {
         SafeInputUtil.getInstance().registerMouseEventListener(new MouseEventListener() {
             @Override
             public void onMouseEvent(MouseEventData data) {
                 if (data.getEventType() == MouseEventType.MOUSE_WHEEL_MOVED) {
-                    getCamera().setScale(getCamera().getScale() + ZOOM_SCALE_FACTOR * data.getMouseWheelRotation());
+                    //getCamera().setScale(getCamera().getScale() + ZOOM_SCALE_FACTOR * data.getMouseWheelRotation());
                 } else if (data.getEventType() == MouseEventType.MOUSE_PRESSED) {
                     if (data.getMouseButton() == MouseEvent.BUTTON2) {
                         getCamera().moveToTarget(data.getWorldPosition(getCamera()), 5);
@@ -91,7 +101,7 @@ public class WarpArea extends Area{
     public MapPlanet getCurrentPlanet() {
         float minDist = Float.MAX_VALUE;
         MapPlanet closestPlanet = null;
-        for (MapPlanet p : planetSet) {
+        for (MapPlanet p : map.getSector(map.getCurrentSectorLocation()).getPlanets()) {
             float dist = GameMath.getDistance(p.getPosition(), player.getPosition(Player.PlayerState.WARP));
             if (dist < minDist) {
                 minDist = dist;
@@ -102,21 +112,6 @@ public class WarpArea extends Area{
             return closestPlanet;
         }
         return null;
-    }
-
-    private void createMap() {
-        planetSet = new HashSet<MapPlanet>();
-        Random random = new Random();
-
-        for (int i = 0; i< NUMBER_PLANETS; i++) {
-            Vector2 pos = new Vector2(random.nextInt(768)-(768/2), random.nextInt(768)-(768/2));
-            MapPlanet p = new MapPlanet(pos, i, getCamera());
-            getChildren().add(p);
-            planetSet.add(p);
-        }
-        MapEarth earth = new MapEarth();
-        getChildren().add(earth);
-
     }
 
     @Override

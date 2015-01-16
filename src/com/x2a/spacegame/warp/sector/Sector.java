@@ -48,4 +48,8 @@ public class Sector {
             p.draw();
         }
     }
+
+    public Set<MapPlanet> getPlanets() {
+        return planets;
+    }
 }

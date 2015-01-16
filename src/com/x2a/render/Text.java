@@ -9,6 +9,8 @@ import java.awt.*;
  */
 public class Text implements Primitive {
 
+    public static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 12);
+
     private String text;
     private Vector2 center;
     private float width;
@@ -18,7 +20,11 @@ public class Text implements Primitive {
 
     private Color color;
 
-    public Text(String text, Vector2 center, float width, float height, float rotation, Color color, float depth) {
+    private Font font;
+
+    private boolean centerHorz;
+
+    public Text(String text, Font font, boolean centerHorz, Vector2 center, float width, float height, float rotation, Color color, float depth) {
         this.text = text;
         this.center = new Vector2(center);
         this.width = width;
@@ -27,7 +33,14 @@ public class Text implements Primitive {
         this.rotation = rotation;
 
         this.color = color;
+        this.font = font;
+        this.centerHorz = centerHorz;
     }
+
+    public Text(String text, Vector2 center, float width, float height, float rotation, Color color, float depth) {
+        this(text, DEFAULT_FONT, true, center, width, height, rotation, color, depth);
+    }
+
 
     @Override
     public void doDraw(Graphics2D g2) {
@@ -43,7 +56,11 @@ public class Text implements Primitive {
         g2.rotate(getRotation());
         g2.translate(xTransform2, yTransform2);
 
-        g2.drawString(text, 0, 0);
+        g2.setFont(font);
+
+        int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+
+        g2.drawString(text, -length/2, 0);
 
         g2.translate(-xTransform2, -yTransform2);
         g2.rotate(getRotation());
